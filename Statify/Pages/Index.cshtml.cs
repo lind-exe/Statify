@@ -14,7 +14,7 @@ namespace Statify.Pages
 
         public void OnGet()
         {
-            //hej 333
+            
         }
     }
 }
