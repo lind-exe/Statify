@@ -1,3 +1,6 @@
+using Statify.Interfaces;
+using Statify.Services;
+
 namespace Statify
 {
     public class Program
@@ -8,6 +11,14 @@ namespace Statify
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+			builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
+
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+                                                   
+            });
 
             var app = builder.Build();
 
@@ -25,6 +36,8 @@ namespace Statify
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.MapRazorPages();
 

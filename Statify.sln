@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Statify", "Statify\Statify.csproj", "{109061AE-B8E1-4933-8365-4C9867099301}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statify.Tests", "Statify.Tests\Statify.Tests.csproj", "{C8872F75-72A2-4516-B8C5-564F7A4D4BCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Statify.Tests", "Statify.Tests\Statify.Tests.csproj", "{C8872F75-72A2-4516-B8C5-564F7A4D4BCC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
