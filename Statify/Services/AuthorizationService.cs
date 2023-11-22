@@ -31,5 +31,25 @@ namespace Statify.Services
                 return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
             }
         }
+        public string Base64EncodeSHA256(string sha256Hash)
+        {
+            byte[] hashBytes = Encoding.UTF8.GetBytes(sha256Hash);
+            string base64String = Convert.ToBase64String(hashBytes)
+                .Replace("=", "")
+                .Replace("+", "-")
+                .Replace("/", "_");
+
+            return base64String;
+        }
+        public string GenerateCodeChallenge()
+        {
+            var length = 64;
+
+            var randomString = GenerateRandomString(length);
+            var sha256 = ComputeSHA256(randomString);
+            var base64 = Base64EncodeSHA256(sha256);
+
+            return base64;
+        }
     }
 }
