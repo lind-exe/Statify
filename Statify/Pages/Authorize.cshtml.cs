@@ -27,6 +27,7 @@ namespace Statify.Pages
         {
             var codeChallenge = _authorizationService.GenerateCodeChallenge();
             HttpContext.Session.SetString("code_verifier", codeChallenge);
+            HttpContext.Session.SetString("code_challenge", codeChallenge);
 
             string authUrl = $"https://accounts.spotify.com/authorize";
             var queryParams = new StringBuilder();

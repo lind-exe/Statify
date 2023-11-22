@@ -6,8 +6,6 @@ namespace Statify.Services
 {
     public class AuthorizationService : IAuthorizationService
     {
-		
-
 		public string GenerateRandomString(int length)
         {
             const string possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

@@ -16,6 +16,7 @@ namespace Statify.Pages
         {
             if (code is not null)
             {
+                Console.WriteLine($"Received authorization code: {code}");
                 var tokenResponse = await ExchangeCodeForTokenAsync(code);
                 // Process token response as needed
                 return Content(tokenResponse); // Return response content for demonstration purposes
@@ -27,18 +28,21 @@ namespace Statify.Pages
         private async Task<string> ExchangeCodeForTokenAsync(string code)
         {
             string codeVerifier = HttpContext.Session.GetString("code_verifier");
-
+            string codeChallenge = HttpContext.Session.GetString("code_challenge");
+            
             using var httpClient = new HttpClient();
             var tokenRequest = new Dictionary<string, string>
             {
+                { "client_id", ClientId },
                 { "grant_type", "authorization_code" },
                 { "code", code },
                 { "redirect_uri", RedirectUri },
-                { "client_id", ClientId },
-                { "code_verifier", codeVerifier }
+                { "code_verifier", codeVerifier },
             };
 
-            var response = await httpClient.PostAsync("https://accounts.spotify.com/api/token", new FormUrlEncodedContent(tokenRequest));
+            var content = new FormUrlEncodedContent(tokenRequest);
+
+            var response = await httpClient.PostAsync("https://accounts.spotify.com/api/token", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -47,7 +51,7 @@ namespace Statify.Pages
             else
             {
                 // Handle the error, log the response, etc.
-                return "Token request failed";
+                return $"Token request failed with status code: {response.StatusCode}";
             }
         }
     }
