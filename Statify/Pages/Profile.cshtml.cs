@@ -9,7 +9,7 @@ namespace Statify.Pages
     {
         private IUserService _userService;
         [BindProperty]
-        public User User { get; set; }
+        public new User? User { get; set; }
 
         public ProfileModel(IUserService userService)
         {

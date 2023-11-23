@@ -6,8 +6,8 @@ namespace Statify.Services
 {
     public class UserService : IUserService
     {
-        public PKCEAuthorization Authentication { get; set; }
-        public User User { get; set; }
+        public PKCEAuthorization? Authentication { get; set; }
+        public User? User { get; set; }
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UserService(IHttpContextAccessor httpContextAccessor)
@@ -18,7 +18,11 @@ namespace Statify.Services
         public async Task<User> GetUserFromSpotifyWithWebApi()
         {
             Authentication = _httpContextAccessor.HttpContext.Session.GetObjectFromJson<PKCEAuthorization>("User");
-            string accessToken = Authentication.AccessToken;
+            string accessToken = string.Empty;
+            if (Authentication is not null)
+            {
+                accessToken = Authentication.AccessToken;
+            }
 
             using (HttpClient httpClient = new HttpClient())
             {
@@ -33,15 +37,15 @@ namespace Statify.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    return User = JsonSerializer.Deserialize<User>(content);
+                    User = JsonSerializer.Deserialize<User>(content);
+                    return User ?? throw new NullReferenceException("User was null");
                 }
                 else
                 {
-                    Console.WriteLine($"Error: {response.StatusCode}");
+                    return User.Empty;
                 }
-                return null;
             }
         }
-       
+
     }
 }

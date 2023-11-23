@@ -4,11 +4,16 @@
 }
 
 
-<div class="">
-    <div class="card">
-        <p>Country: @Model.User.Country</p>
+@if (Model.User is not null)
+{
+    <div class="">
+        <div class="card">
+            <p>Country: @Model.User.Country</p>
+            @foreach (var i in Model.User.Images)
+            {
+                <img id="img1" alt="Image1.png" style="width: 150px; height: 150px;" src="@i.Url">
+            }
 
+        </div>
     </div>
-
-
-</div>
+}

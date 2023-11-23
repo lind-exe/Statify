@@ -9,7 +9,7 @@ namespace Statify.Interfaces
     {
         public void GenerateCodeChallenge();
 
-        public string GenerateRandomString();
+        public string GenerateRandomString(int length);
 
         public string GenerateCodeChallenge(string codeVerifier);
     }

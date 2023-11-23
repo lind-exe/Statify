@@ -4,6 +4,8 @@ namespace Statify.Models
 {
     public class User
     {
+        public static User Empty => new User();
+
         [JsonPropertyName("country")]
         public string Country { get; set; }
 

@@ -16,7 +16,7 @@ namespace Statify.Pages
     {
         private const string RedirectUri = "https://localhost:7274";
         private const string Scope = "user-read-private user-read-email";
-        public PKCEAuthorization Authentication { get; set; }
+        public PKCEAuthorization? Authentication { get; set; }
 
         private readonly IAuthorizationService _authorizationService;
 
@@ -24,7 +24,6 @@ namespace Statify.Pages
         {
             _authorizationService = authorizationService;
         }
-
 
         public IActionResult Init()
         {
@@ -43,26 +42,19 @@ namespace Statify.Pages
 
         public async Task<IActionResult> OnGetAsync(string code)
         {
-            // Retrieve user information from session
             Authentication = HttpContext.Session.GetObjectFromJson<PKCEAuthorization>("User");
             Authentication ??= new PKCEAuthorization { Authenticated = false };
 
-            // If the user is not authenticated and there is no authorization code
             if (!Authentication.Authenticated && string.IsNullOrEmpty(code))
             {
-                // Initiate the authorization flow by redirecting to Spotify
                 return Init();
             }
 
-            // If an authorization code is present and the user is not authenticated
             if (!Authentication.Authenticated && !string.IsNullOrEmpty(code))
             {
-                Console.WriteLine($"Received authorization code: {code}");
                 var tokenResponse = await ExchangeCodeForTokenAsync(code);
                 // Process token response as needed
             }
-
-            // Return the page
             return Page();
         }
 
@@ -88,8 +80,12 @@ namespace Statify.Pages
             {
                 string responseString = await response.Content.ReadAsStringAsync();
                 Authentication = JsonSerializer.Deserialize<PKCEAuthorization>(responseString);
-                Authentication.Authenticated = true;
-                HttpContext.Session.SetObjectAsJson("User", Authentication);
+
+                if (Authentication is not null)
+                {
+                    Authentication.Authenticated = true;
+                    HttpContext.Session.SetObjectAsJson("User", Authentication);
+                }
             }
             else
             {
