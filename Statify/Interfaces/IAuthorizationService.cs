@@ -1,13 +1,16 @@
-﻿using System.Security.Cryptography;
+﻿using Statify.Models;
+using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Statify.Interfaces
 {
     public interface IAuthorizationService
     {
-		public string GenerateRandomString(int length);
-		public string ComputeSHA256(string plain);
-		public string Base64EncodeSHA256(string sha256Hash);
-		public string GenerateCodeChallenge();
-	}
+        public void GenerateCodeChallenge();
+
+        public string GenerateRandomString();
+
+        public string GenerateCodeChallenge(string codeVerifier);
+    }
 }

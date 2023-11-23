@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Statify.Interfaces;
+using Statify.Models;
 using System.Text;
 
 namespace Statify.Pages
@@ -14,7 +15,6 @@ namespace Statify.Pages
             _authorizationService = authorizationService;
         }
 
-        private const string ClientId = "de733e5c3f6b418a97c787f8abe82ba5";
         private const string RedirectUri = "https://localhost:7274";
         private const string Scope = "user-read-private user-read-email";
 
@@ -25,17 +25,14 @@ namespace Statify.Pages
 
         public IActionResult OnPostAuthorize()
         {
-            var codeChallenge = _authorizationService.GenerateCodeChallenge();
-            HttpContext.Session.SetString("code_verifier", codeChallenge);
-            HttpContext.Session.SetString("code_challenge", codeChallenge);
-
+            _authorizationService.GenerateCodeChallenge();
             string authUrl = $"https://accounts.spotify.com/authorize";
             var queryParams = new StringBuilder();
             queryParams.Append($"?response_type=code");
-            queryParams.Append($"&client_id={ClientId}");
+            queryParams.Append($"&client_id={SpotifyAPICodes.ClientId}");
             queryParams.Append($"&scope={Scope}");
             queryParams.Append($"&code_challenge_method=S256");
-            queryParams.Append($"&code_challenge={codeChallenge}");
+            queryParams.Append($"&code_challenge={SpotifyAPICodes.CodeChallenge}");
             queryParams.Append($"&redirect_uri={RedirectUri}");
 
             return Redirect(authUrl + queryParams.ToString());

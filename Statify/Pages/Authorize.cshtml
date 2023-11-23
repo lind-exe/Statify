@@ -1,12 +1,10 @@
 ﻿@page
 @model Statify.Pages.AuthorizeModel
-@inject Interfaces.IAuthorizationService authorizationService
 @{
-    var code = authorizationService.GenerateCodeChallenge();
+
 }
 
 <form method="post" asp-page="/Authorize" asp-page-handler="Authorize">
     <button type="submit">Login with Spotify</button>
-    <input type="hidden" name="code_challenge" value="@code">
 </form>
 

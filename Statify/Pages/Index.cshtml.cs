@@ -4,13 +4,14 @@ using System.Net.Http;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Statify.Models;
+using System.Text.Json;
 
 namespace Statify.Pages
 {
     public class IndexModel : PageModel
     {
-        private const string RedirectUri = "https://localhost:7274"; // Should match the redirect URI used in AuthorizeModel
-        private const string ClientId = "de733e5c3f6b418a97c787f8abe82ba5";
+        private const string RedirectUri = "https://localhost:7274"; 
 
         public async Task<IActionResult> OnGetAsync(string code)
         {
@@ -19,25 +20,22 @@ namespace Statify.Pages
                 Console.WriteLine($"Received authorization code: {code}");
                 var tokenResponse = await ExchangeCodeForTokenAsync(code);
                 // Process token response as needed
-                return Content(tokenResponse); // Return response content for demonstration purposes
             }
 
             return Page();
         }
 
-        private async Task<string> ExchangeCodeForTokenAsync(string code)
+        private async Task<IActionResult> ExchangeCodeForTokenAsync(string code)
         {
-            string codeVerifier = HttpContext.Session.GetString("code_verifier");
-            string codeChallenge = HttpContext.Session.GetString("code_challenge");
-            
+            var authenticatedUser = new PKCEAuthorization();
             using var httpClient = new HttpClient();
             var tokenRequest = new Dictionary<string, string>
             {
-                { "client_id", ClientId },
+                { "client_id", SpotifyAPICodes.ClientId },
                 { "grant_type", "authorization_code" },
                 { "code", code },
                 { "redirect_uri", RedirectUri },
-                { "code_verifier", codeVerifier },
+                { "code_verifier", SpotifyAPICodes.CodeVerifier },
             };
 
             var content = new FormUrlEncodedContent(tokenRequest);
@@ -46,13 +44,16 @@ namespace Statify.Pages
 
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadAsStringAsync();
+                string responseString = await response.Content.ReadAsStringAsync();
+                authenticatedUser = JsonSerializer.Deserialize<PKCEAuthorization>(responseString);
+                
             }
             else
             {
                 // Handle the error, log the response, etc.
-                return $"Token request failed with status code: {response.StatusCode}";
+                
             }
+            return Page();
         }
     }
 }
