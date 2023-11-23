@@ -4,19 +4,21 @@ namespace Statify.Models
 {
     public class PKCEAuthorization
     {
+        public bool Authenticated { get; set; }
+
         [JsonPropertyName("access_token")]
-        public int AccessToken { get; set; }
+        public string AccessToken { get; set; }
 
         [JsonPropertyName("token_type")]
-        public int TokenType { get; set; }
+        public string TokenType { get; set; }
 
         [JsonPropertyName("scope")]
-        public int Scope { get; set; }
+        public string Scope { get; set; }
 
         [JsonPropertyName("expires_in")]
         public int ExpiresIn { get; set; }
 
         [JsonPropertyName("refresh_token")]
-        public int RefreshToken { get; private set; }
+        public string RefreshToken { get;  set; }
     }
 }

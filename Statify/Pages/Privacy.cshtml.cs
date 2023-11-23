@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Statify.Models;
 
 namespace Statify.Pages
 {
@@ -7,6 +8,8 @@ namespace Statify.Pages
     {
         public void OnGet()
         {
+
+
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace Statify.Services
 {
-    public class AuthorizationService : IAuthorizationService
+    public sealed class AuthorizationService : IAuthorizationService
     {
         public void GenerateCodeChallenge()
         {
