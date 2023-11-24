@@ -52,19 +52,18 @@ namespace Statify.Services
 
         public string ReplaceWithTimeout(string input, string pattern, string replacement)
         {
-            int timeoutMs = 5000; 
+            int timeoutMs = 5000;
             DateTime startTime = DateTime.Now;
 
-            var regex = new Regex(pattern);
+            var regex = new Regex(pattern, RegexOptions.None, TimeSpan.FromMilliseconds(100));
             string result = string.Empty;
 
-            int chunkSize = 100; 
-            int startIndex = 0;
+            int chunkSize = 100;
 
-            while (startIndex < input.Length)
+            for (int startIndex = 0; startIndex < input.Length; startIndex += chunkSize)
             {
-                int endIndex = Math.Min(startIndex + chunkSize, input.Length - startIndex);
-                string chunk = input.Substring(startIndex, endIndex);
+                int endIndex = Math.Min(startIndex + chunkSize, input.Length);
+                string chunk = input.Substring(startIndex, endIndex - startIndex);
 
                 result += regex.Replace(chunk, replacement);
 
@@ -73,10 +72,7 @@ namespace Statify.Services
                     result = "Timeout occurred during regex operation";
                     break;
                 }
-
-                startIndex += chunkSize;
             }
-
             return result;
         }
     }
