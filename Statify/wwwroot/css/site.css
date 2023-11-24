@@ -1,5 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
+.text-color-accent {
+    color: #72D4FF;
+}
+.text-color-white {
+    color: #efefef;
+}
+
+.letter {
+    display: inline-block;
+    text-shadow: 0px 3px 4px #00000037; /* You can adjust the shadow values */
+}
+
+@font-face{
+    font-family:'GothamBold';
+    src: url('../fonts/GothamBold.ttf') format('truetype')
+}
+
 html {
     font-size: 14px;
 }
@@ -25,7 +42,9 @@ body {
 
 :root {
     --bs-body-bg: #46577F;
-    --bs-body-font-family: Montserrat;
+    --bs-body-font-family: 'GothamBold';
+    --bs-bg-light: #627AB2;
+    --bs-secondary: #627AB2;
 }
 
 .container {
@@ -54,3 +73,23 @@ body {
 nav {
     min-height: 80px; /* Set your desired minimum height */
 }
+
+.bg-primary {
+    background-color: #7E9DE5;
+}
+.bg-secondary {
+    background-color: #627AB2;
+}
+
+.bg-color {
+    background-color: #627AB2;
+    border: none;
+}
+.font-big{
+    font-size: 78px;
+}
+
+.shadow {
+    box-shadow: 0px 3px 4px #000000d9;
+}
+
