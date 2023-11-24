@@ -34,5 +34,34 @@ namespace Statify.Tests
             // Assert
             Assert.Equal(expectedCode, codeChallenge);
         }
+
+        [Fact]
+        public async Task ReplaceWithTimeoutWhenTimeoutOccurredThenReturnsTimeoutMessage()
+        {
+            // Arrange
+            string input = "Just/some/text"; 
+            string pattern = "\\/"; 
+            string replacement = "_";
+
+            int timeoutMs = 10; // Timeout set to 10 milliseconds for testing
+
+            var methodUnderTest = new AuthorizationService(); 
+
+            // Act
+            var task = Task.Run(() => methodUnderTest.ReplaceWithTimeout(input, pattern, replacement));
+            await Task.Delay(timeoutMs);
+
+            // Assert
+            Assert.True(task.IsCompleted);
+
+            if (!task.IsCompleted)
+            {
+                Assert.True(task.IsCanceled, "Task should be canceled due to timeout");
+            }
+            else
+            {
+                Assert.NotEqual("Timeout occurred during regex operation", task.Result);
+            }
+        }
     }
 }

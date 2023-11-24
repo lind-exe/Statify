@@ -16,15 +16,21 @@ namespace Statify.Services
         }
         public string GenerateRandomString(int length)
         {
-            const string chars = "abcdefghijklmnopqrstuvwxyz123456789";
-            var random = new Random();
-            var nonce = new char[length];
-            for (int i = 0; i < nonce.Length; i++)
+            const string allowedChars = "abcdefghijklmnopqrstuvwxyz123456789";
+            byte[] randomBytes = new byte[length];
+
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
-                nonce[i] = chars[random.Next(chars.Length)];
+                rng.GetBytes(randomBytes);
             }
 
-            return new string(nonce);
+            StringBuilder result = new StringBuilder(length);
+            foreach (byte b in randomBytes)
+            {
+                result.Append(allowedChars[b % allowedChars.Length]);
+            }
+
+            return result.ToString();
         }
         public string GenerateCodeChallenge(string codeVerifier)
         {
@@ -33,14 +39,33 @@ namespace Statify.Services
                 using var sha256 = SHA256.Create();
                 var hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(codeVerifier));
                 var b64Hash = Convert.ToBase64String(hash);
-                var code = Regex.Replace(b64Hash, "\\+", "-");
-                code = Regex.Replace(code, "\\/", "_");
-                code = Regex.Replace(code, "=+$", "");
+                var code = ReplaceWithTimeout(b64Hash, "\\+", "-");
+                code = ReplaceWithTimeout(code, "\\/", "_");
+                code = ReplaceWithTimeout(code, "=+$", "");
                 return code;
             }
             else
+            {
                 return string.Empty;
+            }
         }
 
+        public string ReplaceWithTimeout(string input, string pattern, string replacement)
+        {           
+            int timeoutMs = 1000; 
+
+            var timeout = new CancellationTokenSource();
+            timeout.CancelAfter(timeoutMs);
+
+            try
+            {
+                var regex = new Regex(pattern);
+                return regex.Replace(input, replacement);
+            }
+            catch (OperationCanceledException)
+            {
+                return "Timeout occurred during regex operation";
+            }
+        }
     }
 }
