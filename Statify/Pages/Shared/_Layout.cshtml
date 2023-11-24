@@ -10,26 +10,22 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Statify</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        <nav class="navbar navbar-expand-l box-shadow mb-2">
+            <div class="container container-bg page-container text-center">
+
+                @* BURGER DROPDOWN *@
+                <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Authorize">Login</a>
-                        </li> 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Profile">Profile</a>
+
+                @* CENTERED NAV BRANDING *@
+                <a class="navbar-brand textcolor mx-auto" style="color: #FFFFFF;" href="/Profile"> <div class="me-5">Statify</div></a>  @* quick-fix, to be revisited *@
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav flex-grow-1 ml-auto">
+                        <li class="nav-item text-center">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Profile">Profile</a>
                         </li>
                     </ul>
                 </div>
@@ -42,9 +38,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Statify - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <footer class="footer text-white">
+        <div class="container container-bg text-center">
+            &copy; 2023 - Statify - Jonathan & Daniel
         </div>
     </footer>
 
