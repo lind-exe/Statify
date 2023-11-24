@@ -44,7 +44,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"lind-exe_Statify" /o:"lind-exe" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build --configuration Debug  # Change to Debug for coverage
           dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
