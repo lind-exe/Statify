@@ -55,7 +55,7 @@ namespace Statify.Pages
                 var tokenResponse = await ExchangeCodeForTokenAsync(code);
                 // Process token response as needed
             }
-            return Page();
+            return RedirectToPage("/Profile");
         }
 
         private async Task<IActionResult> ExchangeCodeForTokenAsync(string code)
