@@ -51,21 +51,33 @@ namespace Statify.Services
         }
 
         public string ReplaceWithTimeout(string input, string pattern, string replacement)
-        {           
-            int timeoutMs = 1000; 
+        {
+            int timeoutMs = 5000; 
+            DateTime startTime = DateTime.Now;
 
-            var timeout = new CancellationTokenSource();
-            timeout.CancelAfter(timeoutMs);
+            var regex = new Regex(pattern);
+            string result = string.Empty;
 
-            try
+            int chunkSize = 100; 
+            int startIndex = 0;
+
+            while (startIndex < input.Length)
             {
-                var regex = new Regex(pattern);
-                return regex.Replace(input, replacement);
+                int endIndex = Math.Min(startIndex + chunkSize, input.Length - startIndex);
+                string chunk = input.Substring(startIndex, endIndex);
+
+                result += regex.Replace(chunk, replacement);
+
+                if ((DateTime.Now - startTime).TotalMilliseconds > timeoutMs)
+                {
+                    result = "Timeout occurred during regex operation";
+                    break;
+                }
+
+                startIndex += chunkSize;
             }
-            catch (OperationCanceledException)
-            {
-                return "Timeout occurred during regex operation";
-            }
+
+            return result;
         }
     }
 }
