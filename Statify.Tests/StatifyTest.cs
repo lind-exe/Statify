@@ -1,9 +1,53 @@
+using Microsoft.AspNetCore.Routing;
+using Statify.Models;
 using Statify.Services;
+using System.Text.RegularExpressions;
 
 namespace Statify.Tests
 {
     public class StatifyTest
     {
+        [Fact]
+        public void CheckIfGenerateCodeChallengIsNotEmpty()
+        {
+            // Arrange
+            var auth = new AuthorizationService();
+
+            // Act
+            auth.GenerateCodeChallenge();
+
+            // Assert
+            Assert.False(string.IsNullOrWhiteSpace(SpotifyAPICodes.CodeChallenge));
+        }
+
+        [Fact]
+        public void CanGenerateCodeChallengeWithCorrectLength()
+        {
+            // Arrange
+            var auth = new AuthorizationService();
+
+            // Act
+            auth.GenerateCodeChallenge();
+            const int expectedLength = 43;
+
+            // Assert
+            Assert.Equal(expectedLength, SpotifyAPICodes.CodeChallenge.Length);
+        }
+
+        [Fact]
+        public void GenerateCodeChallengeHasValidCharacters()
+        {
+            // Arrange
+            var auth = new AuthorizationService();
+
+            // Act
+            auth.GenerateCodeChallenge();
+
+            // Assert
+            Assert.Matches("^[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_]+$", SpotifyAPICodes.CodeChallenge);
+        }
+
+
         [Fact]
         public void CanGenerateRandomCodeChallengeStringOfCorrectLength()
         {
