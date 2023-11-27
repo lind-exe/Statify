@@ -1,12 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
 .text-color-accent {
-    color: #72D4FF;
+    color: #3A7CEE;
 }
 .text-color-white {
-    color: #efefef;
+    color: #D5E3FB;
 }
 
+secondaryBg {
+    background-color: #1259D3;
+}
 .letter {
     display: inline-block;
     text-shadow: 0px 3px 4px #00000037; /* You can adjust the shadow values */
@@ -41,29 +44,29 @@ body {
 }
 
 :root {
-    --bs-body-bg: #46577F;
+    --bs-body-bg: #020813;
     --bs-body-font-family: 'GothamBold';
-    --bs-bg-light: #627AB2;
-    --bs-secondary: #627AB2;
+    --bs-bg-light: #1259D3;
+    --bs-secondary: #1259D3;
 }
 
 .container {
-    border:none;
-    background-color: #46577F;
+    border: none;
+    background-color: #020813;
 }
 
 .container-bg {
-    background-color: #7E9DE5;
-    border:none;
+    background-color: #3A7CEE;
+    border: none;
 }
 
 .navbar, .footer {
-    background-color: #7E9DE5;
-    border:none;
+    background-color: #3A7CEE;
+    border: none;
 }
 
 .navbg {
-    background-color: #7E9DE5;
+    background-color: #3A7CEE;
 }
 
 .page-container {
@@ -78,11 +81,11 @@ nav {
     background-color: #7E9DE5;
 }
 .bg-secondary {
-    background-color: #627AB2;
+    background-color: #1259D3;
 }
 
 .bg-color {
-    background-color: #627AB2;
+    background-color: #1259D3;
     border: none;
 }
 .font-big{
@@ -93,3 +96,15 @@ nav {
     box-shadow: 0px 3px 4px #000000d9;
 }
 
+.scrollable-container {
+    overflow: hidden;
+}
+
+.hideScroll::-webkit-scrollbar {
+    display: none;
+}
+
+.hideScroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

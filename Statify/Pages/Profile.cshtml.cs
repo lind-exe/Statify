@@ -10,6 +10,7 @@ namespace Statify.Pages
         private IUserService _userService;
         [BindProperty]
         public new User? User { get; set; }
+        public PlayListCollection? Playlists { get; set; }
 
         public ProfileModel(IUserService userService)
         {
@@ -18,8 +19,10 @@ namespace Statify.Pages
 
         public async Task OnGetAsync()
         {
+            Playlists = new PlayListCollection();
             User = new();
             User = await _userService.GetUserFromSpotifyWithWebApi();
+            Playlists = await _userService.Get50PlaylistsFromAuthorizedUser();
 
         }
     }

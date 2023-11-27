@@ -8,6 +8,7 @@ namespace Statify.Services
     {
         public PKCEAuthorization? Authentication { get; set; }
         public User? User { get; set; }
+        public PlayListCollection? PlaylistCollection { get; set; }
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UserService(IHttpContextAccessor httpContextAccessor)
@@ -46,6 +47,37 @@ namespace Statify.Services
                 }
             }
         }
+        public async Task<PlayListCollection> Get50PlaylistsFromAuthorizedUser()
+        {
+            Authentication = _httpContextAccessor.HttpContext.Session.GetObjectFromJson<PKCEAuthorization>("User");
+            string accessToken = string.Empty;
+            if (Authentication is not null)
+            {
+                accessToken = Authentication.AccessToken;
+            }
 
+            using (HttpClient httpClient = new HttpClient())
+            {
+                httpClient.BaseAddress = new Uri("https://api.spotify.com/v1/");
+
+                httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
+
+                string endpoint = "me/playlists";
+
+                HttpResponseMessage response = await httpClient.GetAsync(endpoint);
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string content = await response.Content.ReadAsStringAsync();
+                    PlaylistCollection = JsonSerializer.Deserialize<PlayListCollection>(content);
+                    return PlaylistCollection ?? throw new NullReferenceException("Playlist was null");
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }
