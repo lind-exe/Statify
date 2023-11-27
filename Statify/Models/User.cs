@@ -4,43 +4,43 @@ namespace Statify.Models
 {
     public class User
     {
-        public static User Empty => new User();
+        public static User Empty => new();
 
         [JsonPropertyName("country")]
-        public string Country { get; set; }
+        public string? Country { get; set; }
 
         [JsonPropertyName("display_name")]
-        public string DisplayName { get; set; }
+        public string? DisplayName { get; set; }
 
         [JsonPropertyName("email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [JsonPropertyName("explicit_content")]
-        public ExplicitContent ExplicitContent { get; set; }
+        public ExplicitContent? ExplicitContent { get; set; }
 
         [JsonPropertyName("external_urls")]
-        public ExternalUrls ExternalUrls { get; set; }
+        public ExternalUrls? ExternalUrls { get; set; }
 
         [JsonPropertyName("followers")]
-        public Followers Followers { get; set; }
+        public Followers? Followers { get; set; }
 
         [JsonPropertyName("href")]
-        public string Href { get; set; }
+        public string? Href { get; set; }
 
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         [JsonPropertyName("images")]
-        public Image[] Images { get; set; }
+        public Image[]? Images { get; set; }
 
         [JsonPropertyName("product")]
-        public string Product { get; set; }
+        public string? Product { get; set; }
 
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 
     public class ExplicitContent
@@ -55,13 +55,13 @@ namespace Statify.Models
     public class ExternalUrls
     {
         [JsonPropertyName("spotify")]
-        public string Spotify { get; set; }
+        public string? Spotify { get; set; }
     }
 
     public class Followers
     {
         [JsonPropertyName("href")]
-        public string Href { get; set; }
+        public string? Href { get; set; }
 
         [JsonPropertyName("total")]
         public int Total { get; set; }
@@ -70,7 +70,7 @@ namespace Statify.Models
     public class Image
     {
         [JsonPropertyName("url")]
-        public string Url { get; set; }
+        public string? Url { get; set; }
 
         [JsonPropertyName("height")]
         public int Height { get; set; }

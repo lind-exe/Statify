@@ -1,24 +1,100 @@
 ﻿@page
 @model Statify.Pages.ProfileModel
 @{
-    var img = Model.User.Images.Where(x => x.Width == 300).FirstOrDefault();
+    var src = "";
+    var followerCount = 0;
+    if (Model.User is not null)
+    {
+        var userImage = Model.User.Images?.FirstOrDefault(x => x.Width == 300);
+        src = userImage?.Url ?? "https://image.spreadshirtmedia.net/image-server/v1/compositions/T773A1PA1611PT10X4Y4D147280542W6736H5479/views/3,width=550,height=550,appearanceId=1,backgroundColor=FFFFFF,noPt=true/trollface-rageface-meme-termosmugg.jpg";
+
+        if (Model.User.Followers is not null)
+        {
+            followerCount = Model.User.Followers.Total;
+        }
+    }
 }
 
 
 @if (Model.User is not null)
 {
-    <div class="row text-center">
-        <div class="col-8 mx-auto">
-            <h1>@Model.User.DisplayName</h1>
+    <div class="mx-auto page-container">
 
-            <img id="img1" alt="Image1.png" style="width: 150px; height: 150px;" src="@img?.Url">
+        <div class="row text-center my-4">
+            <div class="col">
+                <img class="shadow" id="img1" alt="Image1.png" style="width: 225px; height: 225px; border: solid 2px #1259D3;" src="@src">
+            </div>
         </div>
-        <div class="col-8 mx-auto">
-            <h4>Country: @Model.User.Country</h4>
-            <h4>Email: @Model.User.Email</h4>
-            <h4>Followers: @Model.User.Followers.Total</h4>
-            <h4>Subscription: @Model.User.Product</h4>
-            <h4>Account: @Model.User.Id</h4>
+
+        <div class="row my-4 bg-color text-center text-color-white shadow">
+            <div class="col py-3">
+                <h1>@Model.User.DisplayName</h1>
+                <h1>@Model.User.Country</h1>
+                <br />
+                <h1>Account - @Model.User.Id</h1>
+                <h1>@Model.User.Product user</h1>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <h1 class="font-big text-color-accent letter">@followerCount</h1>
+            <h2 class="text-color-accent letter">FOLLOWERS</h2>
+        </div>
+
+        <div class="row scrollable-container my-4" style="background-color: #020A17" id="scrollableContainer">
+            <div class="d-flex flex-row overflow-auto hideScroll" id="list">
+                @if (Model.Playlists?.Items?.Any() == true)
+                {
+                    @foreach (var playlist in Model.Playlists.Items)
+                    {
+                        <div class="col ms-4 my-4">
+                            <div class="card" style="background-color: #3A7CEE">
+                                <div class="card-body">
+                                    @if (playlist.Images?.Any(x => x.Url is not null) == true)
+                                    {
+                                        var validSrc = playlist.Images.First(x => x.Url is not null)?.Url ?? "";
+                                        <img src="@validSrc" alt="Playlist image" style="height:150px; width:150px">
+                                        <a class="stretched-link" href="@playlist.ExternalUrls!.Spotify" style="z-index:0"></a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <h1>No playlists found!</h1>
+                }
+            </div>
         </div>
     </div>
 }
+
+<script>
+    $(document).ready(function () {
+        var isMouseDown = false;
+        var startX;
+        var scrollLeft;
+
+        $('#scrollableContainer').mousedown(function (e) {
+            isMouseDown = true;
+            startX = e.pageX - $('#scrollableContainer').offset().left;
+            scrollLeft = $('#scrollableContainer').scrollLeft();
+        });
+
+        $('#scrollableContainer').mouseleave(function () {
+            isMouseDown = false;
+        });
+
+        $(document).mouseup(function () {
+            isMouseDown = false;
+        });
+
+        $('#scrollableContainer').mousemove(function (e) {
+            if (!isMouseDown) return;
+            var x = e.pageX - $('#scrollableContainer').offset().left;
+            var walk = (x - startX) * 3; // Adjust the scrolling speed here
+            $('#scrollableContainer').scrollLeft(scrollLeft - walk);
+        });
+    });
+</script>

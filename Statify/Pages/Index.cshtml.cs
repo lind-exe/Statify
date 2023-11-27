@@ -16,7 +16,7 @@ namespace Statify.Pages
     {
         private const string RedirectUri = "https://localhost:7274";
         private const string Scope = "user-read-private user-read-email";
-        public PKCEAuthorization? Authentication { get; set; }
+        public PkceAuthorization? Authentication { get; set; }
 
         private readonly IAuthorizationService _authorizationService;
 
@@ -31,10 +31,10 @@ namespace Statify.Pages
             string authUrl = $"https://accounts.spotify.com/authorize";
             var queryParams = new StringBuilder();
             queryParams.Append($"?response_type=code");
-            queryParams.Append($"&client_id={SpotifyAPICodes.ClientId}");
+            queryParams.Append($"&client_id={SpotifyApiCodes.ClientId}");
             queryParams.Append($"&scope={Scope}");
             queryParams.Append($"&code_challenge_method=S256");
-            queryParams.Append($"&code_challenge={SpotifyAPICodes.CodeChallenge}");
+            queryParams.Append($"&code_challenge={SpotifyApiCodes.CodeChallenge}");
             queryParams.Append($"&redirect_uri={RedirectUri}");
 
             return Redirect(authUrl + queryParams.ToString());
@@ -42,8 +42,8 @@ namespace Statify.Pages
 
         public async Task<IActionResult> OnGetAsync(string code)
         {
-            Authentication = HttpContext.Session.GetObjectFromJson<PKCEAuthorization>("User");
-            Authentication ??= new PKCEAuthorization { Authenticated = false };
+            Authentication = HttpContext.Session.GetObjectFromJson<PkceAuthorization>("User");
+            Authentication ??= new PkceAuthorization { Authenticated = false };
 
             if (!Authentication.Authenticated && string.IsNullOrEmpty(code))
             {
@@ -52,24 +52,24 @@ namespace Statify.Pages
 
             if (!Authentication.Authenticated && !string.IsNullOrEmpty(code))
             {
-                var tokenResponse = await ExchangeCodeForTokenAsync(code);
-                // Process token response as needed
+                await ExchangeCodeForTokenAsync(code);
+                
             }
             return RedirectToPage("/Profile");
         }
 
         private async Task<IActionResult> ExchangeCodeForTokenAsync(string code)
         {
-            Authentication = HttpContext.Session.GetObjectFromJson<PKCEAuthorization>("User");
+            Authentication = HttpContext.Session.GetObjectFromJson<PkceAuthorization>("User");
 
             using var httpClient = new HttpClient();
             var tokenRequest = new Dictionary<string, string>
             {
-                { "client_id", SpotifyAPICodes.ClientId },
+                { "client_id", SpotifyApiCodes.ClientId },
                 { "grant_type", "authorization_code" },
                 { "code", code },
                 { "redirect_uri", RedirectUri },
-                { "code_verifier", SpotifyAPICodes.CodeVerifier },
+                { "code_verifier", SpotifyApiCodes.CodeVerifier! },
             };
 
             var content = new FormUrlEncodedContent(tokenRequest);
@@ -79,7 +79,7 @@ namespace Statify.Pages
             if (response.IsSuccessStatusCode)
             {
                 string responseString = await response.Content.ReadAsStringAsync();
-                Authentication = JsonSerializer.Deserialize<PKCEAuthorization>(responseString);
+                Authentication = JsonSerializer.Deserialize<PkceAuthorization>(responseString);
 
                 if (Authentication is not null)
                 {
