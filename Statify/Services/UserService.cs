@@ -8,7 +8,7 @@ namespace Statify.Services
 {
     public class UserService : IUserService
     {
-        public PKCEAuthorization? Authentication { get; set; }
+        public PkceAuthorization? Authentication { get; set; }
         public User? User { get; set; }
         public PlayListCollection? PlaylistCollection { get; set; }
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -20,14 +20,14 @@ namespace Statify.Services
 
         private async Task<T> SendSpotifyApiRequest<T>(string endpoint)
         {
-            Authentication = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<PKCEAuthorization>("User");
+            Authentication = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<PkceAuthorization>("User");
 
             if (Authentication is null)
             {
                 throw new InvalidOperationException("User authentication is missing.");
             }
 
-            string accessToken = Authentication.AccessToken;
+            string accessToken = Authentication.AccessToken!;
 
             using HttpClient httpClient = new();
             httpClient.BaseAddress = new Uri("https://api.spotify.com/v1/");

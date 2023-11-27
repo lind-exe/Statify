@@ -11,8 +11,8 @@ namespace Statify.Services
         private readonly int GenerateRandomStringLength = 128;
         public void GenerateCodeChallenge()
         {
-            SpotifyAPICodes.CodeVerifier = GenerateRandomString(GenerateRandomStringLength);
-            SpotifyAPICodes.CodeChallenge = GenerateCodeChallenge(SpotifyAPICodes.CodeVerifier);
+            SpotifyApiCodes.SetCodeVerifier(GenerateRandomString(GenerateRandomStringLength));
+            SpotifyApiCodes.SetCodeChallenge(GenerateCodeChallenge(SpotifyApiCodes.CodeVerifier!));
         }
         public string GenerateRandomString(int length)
         {
