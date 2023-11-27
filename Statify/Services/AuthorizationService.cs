@@ -8,7 +8,7 @@ namespace Statify.Services
 {
     public sealed class AuthorizationService : IAuthorizationService
     {
-        private int GenerateRandomStringLength = 128;
+        private readonly int GenerateRandomStringLength = 128;
         public void GenerateCodeChallenge()
         {
             SpotifyAPICodes.CodeVerifier = GenerateRandomString(GenerateRandomStringLength);
@@ -24,7 +24,7 @@ namespace Statify.Services
                 rng.GetBytes(randomBytes);
             }
 
-            StringBuilder result = new StringBuilder(length);
+            StringBuilder result = new(length);
             foreach (byte b in randomBytes)
             {
                 result.Append(allowedChars[b % allowedChars.Length]);
@@ -36,8 +36,7 @@ namespace Statify.Services
         {
             if (!string.IsNullOrWhiteSpace(codeVerifier))
             {
-                using var sha256 = SHA256.Create();
-                var hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(codeVerifier));
+                var hash = SHA256.HashData(Encoding.UTF8.GetBytes(codeVerifier));
                 var b64Hash = Convert.ToBase64String(hash);
                 var code = ReplaceWithTimeout(b64Hash, "\\+", "-");
                 code = ReplaceWithTimeout(code, "\\/", "_");
@@ -63,7 +62,7 @@ namespace Statify.Services
             for (int startIndex = 0; startIndex < input.Length; startIndex += chunkSize)
             {
                 int endIndex = Math.Min(startIndex + chunkSize, input.Length);
-                string chunk = input.Substring(startIndex, endIndex - startIndex);
+                string chunk = input[startIndex..endIndex];
 
                 result += regex.Replace(chunk, replacement);
 

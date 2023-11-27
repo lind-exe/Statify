@@ -3,28 +3,15 @@
 @{
     var src = "";
     var followerCount = 0;
-    if (Model.User.Images.FirstOrDefault(x => x.Width == 300) is not null)
+    if (Model.User is not null)
     {
+        var userImage = Model.User.Images?.FirstOrDefault(x => x.Width == 300);
+        src = userImage?.Url ?? "https://image.spreadshirtmedia.net/image-server/v1/compositions/T773A1PA1611PT10X4Y4D147280542W6736H5479/views/3,width=550,height=550,appearanceId=1,backgroundColor=FFFFFF,noPt=true/trollface-rageface-meme-termosmugg.jpg";
 
-        var img = Model.User.Images.FirstOrDefault(x => x.Width == 300);
-        if (img is not null)
+        if (Model.User.Followers is not null)
         {
-            src = img.Url;
+            followerCount = Model.User.Followers.Total;
         }
-        else
-        {
-            src = "https://image.spreadshirtmedia.net/image-server/v1/compositions/T773A1PA1611PT10X4Y4D147280542W6736H5479/views/3,width=550,height=550,appearanceId=1,backgroundColor=FFFFFF,noPt=true/trollface-rageface-meme-termosmugg.jpg";
-        }
-        src = img is null ? "" : img.Url;
-
-    }
-    else
-    {
-        src = "https://image.spreadshirtmedia.net/image-server/v1/compositions/T773A1PA1611PT10X4Y4D147280542W6736H5479/views/3,width=550,height=550,appearanceId=1,backgroundColor=FFFFFF,noPt=true/trollface-rageface-meme-termosmugg.jpg";
-    }
-    if (Model.User.Followers is not null)
-    {
-        followerCount = Model.User.Followers.Total;
     }
 }
 
@@ -56,34 +43,27 @@
 
         <div class="row scrollable-container my-4" style="background-color: #020A17" id="scrollableContainer">
             <div class="d-flex flex-row overflow-auto hideScroll" id="list">
-                @if (Model.Playlists is not null)
+                @if (Model.Playlists?.Items?.Any() == true)
                 {
-                    if (Model.Playlists.Items.Length == 0)
+                    @foreach (var playlist in Model.Playlists.Items)
                     {
-                        <h1>No playlists found!</h1>
-                    }
-                    else
-                    {
-                        @foreach (var playlist in Model.Playlists.Items)
-                        {
-                            <div class="col ms-4 my-4">
-                                <div class="card" style="background-color: #3A7CEE">
-                                    <div class="card-body ">
-
-
-                                        @if (@playlist.Images.Where(x => x.Url is not null).FirstOrDefault() is not null)
-                                        {
-
-                                            src = @playlist.Images.Where(x => x.Url is not null).FirstOrDefault().Url;
-                                            <img src="@src" style="height:150px; width:150px">
-                                            <a class="stretched-link" href="@playlist.ExternalUrls.Spotify" style="z-index:0"></a>
-                                        }
-
-                                    </div>
+                        <div class="col ms-4 my-4">
+                            <div class="card" style="background-color: #3A7CEE">
+                                <div class="card-body">
+                                    @if (playlist.Images?.Any(x => x.Url is not null) == true)
+                                    {
+                                        var validSrc = playlist.Images.First(x => x.Url is not null)?.Url ?? "";
+                                        <img src="@validSrc" alt="Playlist image" style="height:150px; width:150px">
+                                        <a class="stretched-link" href="@playlist.ExternalUrls!.Spotify" style="z-index:0"></a>
+                                    }
                                 </div>
                             </div>
-                        }
+                        </div>
                     }
+                }
+                else
+                {
+                    <h1>No playlists found!</h1>
                 }
             </div>
         </div>

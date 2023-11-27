@@ -52,8 +52,8 @@ namespace Statify.Pages
 
             if (!Authentication.Authenticated && !string.IsNullOrEmpty(code))
             {
-                var tokenResponse = await ExchangeCodeForTokenAsync(code);
-                // Process token response as needed
+                await ExchangeCodeForTokenAsync(code);
+                
             }
             return RedirectToPage("/Profile");
         }

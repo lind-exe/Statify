@@ -7,7 +7,7 @@ namespace Statify.Pages
 {
     public class ProfileModel : PageModel
     {
-        private IUserService _userService;
+        private readonly IUserService _userService;
         [BindProperty]
         public new User? User { get; set; }
         public PlayListCollection? Playlists { get; set; }

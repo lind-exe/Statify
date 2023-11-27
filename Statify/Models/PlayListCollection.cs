@@ -4,28 +4,28 @@ namespace Statify.Models
 {
     public class PlayListCollection
     {
-        public static PlayListCollection Empty => new PlayListCollection();
+        public static PlayListCollection Empty => new();
 
         [JsonPropertyName("href")]
-        public string Href { get; set; }
+        public string? Href { get; set; }
 
         [JsonPropertyName("limit")]
         public int Limit { get; set; }
 
         [JsonPropertyName("next")]
-        public string Next { get; set; }
+        public string? Next { get; set; }
 
         [JsonPropertyName("offset")]
         public int Offset { get; set; }
 
         [JsonPropertyName("previous")]
-        public string Previous { get; set; }
+        public string? Previous { get; set; }
 
         [JsonPropertyName("total")]
         public int Total { get; set; }
 
         [JsonPropertyName("items")]
-        public Item[] Items { get; set; }
+        public Item[]? Items { get; set; }
 
         public class Item
         {
@@ -33,76 +33,76 @@ namespace Statify.Models
             public bool Collaborative { get; set; }
 
             [JsonPropertyName("description")]
-            public string Description { get; set; }
+            public string? Description { get; set; }
 
             [JsonPropertyName("external_urls")]
-            public ExternalUrls ExternalUrls { get; set; }
+            public ExternalUrls? ExternalUrls { get; set; }
 
             [JsonPropertyName("href")]
-            public string Href { get; set; }
+            public string? Href { get; set; }
 
             [JsonPropertyName("id")]
-            public string Id { get; set; }
+            public string? Id { get; set; }
 
             [JsonPropertyName("images")]
-            public Image[] Images { get; set; }
+            public Image[]? Images { get; set; }
 
             [JsonPropertyName("name")]
-            public string Name { get; set; }
+            public string? Name { get; set; }
 
             [JsonPropertyName("owner")]
-            public Owner Owner { get; set; }
+            public Owner? Owner { get; set; }
 
             [JsonPropertyName("public")]
             public bool IsPublic { get; set; }
 
             [JsonPropertyName("snapshot_id")]
-            public string SnapshotId { get; set; }
+            public string? SnapshotId { get; set; }
 
             [JsonPropertyName("tracks")]
-            public Tracks Tracks { get; set; }
+            public Tracks? Tracks { get; set; }
 
             [JsonPropertyName("type")]
-            public string Type { get; set; }
+            public string? Type { get; set; }
 
             [JsonPropertyName("uri")]
-            public string Uri { get; set; }
+            public string? Uri { get; set; }
         }
 
         public class ExternalUrls
         {
             [JsonPropertyName("spotify")]
-            public string Spotify { get; set; }
+            public string? Spotify { get; set; }
         }
 
         public class Owner
         {
             [JsonPropertyName("external_urls")]
-            public ExternalUrls ExternalUrls { get; set; }
+            public ExternalUrls? ExternalUrls { get; set; }
 
             [JsonPropertyName("followers")]
-            public Followers Followers { get; set; }
+            public Followers? Followers { get; set; }
 
             [JsonPropertyName("href")]
-            public string Href { get; set; }
+            public string? Href { get; set; }
 
             [JsonPropertyName("id")]
-            public string Id { get; set; }
+            public string? Id { get; set; }
 
             [JsonPropertyName("type")]
-            public string Type { get; set; }
+            public string? Type { get; set; }
 
             [JsonPropertyName("uri")]
-            public string Uri { get; set; }
+            public string? Uri { get; set; }
 
             [JsonPropertyName("display_name")]
-            public string DisplayName { get; set; }
+            public string? DisplayName { get; set; }
         }
 
         public class Followers
         {
             [JsonPropertyName("href")]
-            public string Href { get; set; }
+            public string? Href { get; set; }
 
             [JsonPropertyName("total")]
             public int Total { get; set; }
@@ -111,7 +111,7 @@ namespace Statify.Models
         public class Tracks
         {
             [JsonPropertyName("href")]
-            public string Href { get; set; }
+            public string? Href { get; set; }
 
             [JsonPropertyName("total")]
             public int Total { get; set; }
