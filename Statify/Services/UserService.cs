@@ -1,6 +1,8 @@
 ﻿using Statify.Models;
 using Statify.Interfaces;
+using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Statify.Services
 {
@@ -16,7 +18,7 @@ namespace Statify.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<User> GetUserFromSpotifyWithWebApi()
+        private async Task<T> SendSpotifyApiRequest<T>(string endpoint)
         {
             Authentication = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<PKCEAuthorization>("User");
 
@@ -29,57 +31,29 @@ namespace Statify.Services
 
             using HttpClient httpClient = new();
             httpClient.BaseAddress = new Uri("https://api.spotify.com/v1/");
-
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
-
-            string endpoint = "me";
 
             HttpResponseMessage response = await httpClient.GetAsync(endpoint);
 
             if (response.IsSuccessStatusCode)
             {
                 string content = await response.Content.ReadAsStringAsync();
-                User = JsonSerializer.Deserialize<User>(content);
-                return User ?? throw new NullReferenceException("User was null");
+                return JsonSerializer.Deserialize<T>(content) ?? throw new NullReferenceException($"{typeof(T).Name} was null after deserialization.");
             }
             else
             {
-                return User.Empty;
+                throw new HttpRequestException($"Failed to retrieve information from Spotify API. Status code: {response.StatusCode}");
             }
         }
+
+        public async Task<User> GetUserFromSpotifyWithWebApi()
+        {
+            return await SendSpotifyApiRequest<User>("me");
+        }
+
         public async Task<PlayListCollection> Get50PlaylistsFromAuthorizedUser()
         {
-            Authentication = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<PKCEAuthorization>("User");
-
-            if (Authentication is null)
-            {
-                throw new InvalidOperationException("User authentication is missing.");
-            }
-
-            string accessToken = Authentication.AccessToken;
-
-
-
-            using HttpClient httpClient = new();
-            httpClient.BaseAddress = new Uri("https://api.spotify.com/v1/");
-
-            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
-
-            string endpoint = "me/playlists";
-
-            HttpResponseMessage response = await httpClient.GetAsync(endpoint);
-
-            if (response.IsSuccessStatusCode)
-            {
-
-                string content = await response.Content.ReadAsStringAsync();
-                PlaylistCollection = JsonSerializer.Deserialize<PlayListCollection>(content);
-                return PlaylistCollection ?? throw new NullReferenceException("Playlist was null after deserialization.");
-            }
-            else
-            {
-                throw new HttpRequestException($"Failed to retrieve user information. Status code: {response.StatusCode}");
-            }
+            return await SendSpotifyApiRequest<PlayListCollection>("me/playlists");
         }
     }
 }
