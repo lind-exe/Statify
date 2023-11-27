@@ -17,7 +17,7 @@ namespace Statify.Tests
             auth.GenerateCodeChallenge();
 
             // Assert
-            Assert.False(string.IsNullOrWhiteSpace(SpotifyAPICodes.CodeChallenge));
+            Assert.False(string.IsNullOrWhiteSpace(SpotifyApiCodes.CodeChallenge));
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace Statify.Tests
             const int expectedLength = 43;
 
             // Assert
-            Assert.Equal(expectedLength, SpotifyAPICodes.CodeChallenge.Length);
+            Assert.Equal(expectedLength, SpotifyApiCodes.CodeChallenge!.Length);
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace Statify.Tests
             auth.GenerateCodeChallenge();
 
             // Assert
-            Assert.Matches("^[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_]+$", SpotifyAPICodes.CodeChallenge);
+            Assert.Matches("^[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_]+$", SpotifyApiCodes.CodeChallenge);
         }
 
 
