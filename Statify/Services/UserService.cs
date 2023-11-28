@@ -3,57 +3,36 @@ using Statify.Interfaces;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Razor.Infrastructure;
 
 namespace Statify.Services
 {
     public class UserService : IUserService
     {
+        private readonly ISpotifyService _spotifyService;
         public PkceAuthorization? Authentication { get; set; }
         public User? User { get; set; }
         public PlayListCollection? PlaylistCollection { get; set; }
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserService(IHttpContextAccessor httpContextAccessor)
+        public UserService(ISpotifyService spotifyService)
         {
-            _httpContextAccessor = httpContextAccessor;
+            _spotifyService = spotifyService;
         }
 
-        private async Task<T> SendSpotifyApiRequest<T>(string endpoint)
-        {
-            Authentication = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<PkceAuthorization>("User");
-
-            if (Authentication is null)
-            {
-                throw new InvalidOperationException("User authentication is missing.");
-            }
-
-            string accessToken = Authentication.AccessToken!;
-
-            using HttpClient httpClient = new();
-            httpClient.BaseAddress = new Uri("https://api.spotify.com/v1/");
-            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
-
-            HttpResponseMessage response = await httpClient.GetAsync(endpoint);
-
-            if (response.IsSuccessStatusCode)
-            {
-                string content = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<T>(content) ?? throw new NullReferenceException($"{typeof(T).Name} was null after deserialization.");
-            }
-            else
-            {
-                throw new HttpRequestException($"Failed to retrieve information from Spotify API. Status code: {response.StatusCode}");
-            }
-        }
 
         public async Task<User> GetUserFromSpotifyWithWebApi()
         {
-            return await SendSpotifyApiRequest<User>("me");
+            return await _spotifyService.SendSpotifyApiRequest<User>("me");
         }
-
-        public async Task<PlayListCollection> Get50PlaylistsFromAuthorizedUser()
+        public async Task<PlayListCollection> GetPlaylists(int amount = 20)
         {
-            return await SendSpotifyApiRequest<PlayListCollection>("me/playlists");
+            return await _spotifyService.SendSpotifyApiRequest<PlayListCollection>("me/playlists");
+        }
+        public Task<List<Track>> FindForgottenTracks()
+        {
+            // compare short term - 4 weeks // medium term - 6 months // long term - multiple years
+
+            throw new NotImplementedException();
         }
     }
 }

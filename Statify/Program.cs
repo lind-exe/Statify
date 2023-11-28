@@ -13,6 +13,7 @@ namespace Statify
             builder.Services.AddRazorPages();
 			builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
 			builder.Services.AddScoped<IUserService, UserService>();
+			builder.Services.AddScoped<ISpotifyService, SpotifyService>();
 
             builder.Services.AddHttpClient();
             builder.Services.AddHttpContextAccessor();

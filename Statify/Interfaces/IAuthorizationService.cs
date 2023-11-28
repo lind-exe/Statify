@@ -12,5 +12,7 @@ namespace Statify.Interfaces
         public string GenerateRandomString(int length);
 
         public string GenerateCodeChallenge(string codeVerifier);
+
+        public string GenerateQueryParams();
     }
 }

@@ -3,14 +3,21 @@ using Statify.Models;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Statify.Services
 {
     public sealed class AuthorizationService : IAuthorizationService
     {
         private readonly int GenerateRandomStringLength = 128;
+        private const string RedirectUri = "https://localhost:7274";
+        private const string Scope = "user-read-private user-read-email";
+
         public void GenerateCodeChallenge()
         {
+            
+
+
             SpotifyApiCodes.SetCodeVerifier(GenerateRandomString(GenerateRandomStringLength));
             SpotifyApiCodes.SetCodeChallenge(GenerateCodeChallenge(SpotifyApiCodes.CodeVerifier!));
         }
@@ -73,6 +80,19 @@ namespace Statify.Services
                 }
             }
             return result;
+        }
+        public string GenerateQueryParams()
+        {
+            string authUrl = $"https://accounts.spotify.com/authorize";
+            var queryParams = new StringBuilder();
+            queryParams.Append($"?response_type=code");
+            queryParams.Append($"&client_id={SpotifyApiCodes.ClientId}");
+            queryParams.Append($"&scope={Scope}");
+            queryParams.Append($"&code_challenge_method=S256");
+            queryParams.Append($"&code_challenge={SpotifyApiCodes.CodeChallenge}");
+            queryParams.Append($"&redirect_uri={RedirectUri}");
+
+            return authUrl + queryParams.ToString();
         }
     }
 }

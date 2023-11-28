@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Routing;
+using Moq;
+using Statify.Interfaces;
 using Statify.Models;
 using Statify.Services;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace Statify.Tests
 {
-    public class StatifyTest
+    public class AuthorizationTests
     {
         [Fact]
         public void CheckIfGenerateCodeChallengIsNotEmpty()
@@ -107,5 +110,7 @@ namespace Statify.Tests
                 Assert.NotEqual("Timeout occurred during regex operation", task.Result);
             }
         }
+
+      
     }
 }

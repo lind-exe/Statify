@@ -22,7 +22,7 @@ namespace Statify.Pages
             Playlists = new PlayListCollection();
             User = new();
             User = await _userService.GetUserFromSpotifyWithWebApi();
-            Playlists = await _userService.Get50PlaylistsFromAuthorizedUser();
+            Playlists = await _userService.GetPlaylists();
 
         }
     }
