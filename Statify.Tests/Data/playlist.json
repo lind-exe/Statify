@@ -1,0 +1,790 @@
+{
+  "href": "https://api.spotify.com/v1/users/thelindd3/playlists?offset=0&limit=20",
+  "limit": 20,
+  "next": "https://api.spotify.com/v1/users/thelindd3/playlists?offset=20&limit=20",
+  "offset": 0,
+  "previous": null,
+  "total": 37,
+  "items": [
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/1AiE6FVtLk0EOQJGTliqlV"
+      },
+      "href": "https://api.spotify.com/v1/playlists/1AiE6FVtLk0EOQJGTliqlV",
+      "id": "1AiE6FVtLk0EOQJGTliqlV",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/ab67616d0000b27306e653440a53354d6a4d71c0ab67616d0000b27351301c276626f143f5d68250ab67616d0000b273cd9010694a16e5ec27f6cec0ab67616d0000b273dd5241f1eca89bd87d1c0544",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/ab67616d0000b27306e653440a53354d6a4d71c0ab67616d0000b27351301c276626f143f5d68250ab67616d0000b273cd9010694a16e5ec27f6cec0ab67616d0000b273dd5241f1eca89bd87d1c0544",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/ab67616d0000b27306e653440a53354d6a4d71c0ab67616d0000b27351301c276626f143f5d68250ab67616d0000b273cd9010694a16e5ec27f6cec0ab67616d0000b273dd5241f1eca89bd87d1c0544",
+          "width": 60
+        }
+      ],
+      "name": "My recommendation playlist",
+      "owner": {
+        "display_name": "Jonathan Lind",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/thelindd3"
+        },
+        "href": "https://api.spotify.com/v1/users/thelindd3",
+        "id": "thelindd3",
+        "type": "user",
+        "uri": "spotify:user:thelindd3"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "MiwwNWRhODBhNTg2NTg1ZTY0YTVkMTZlM2IzMzAxMWIyZWYzOTNjNGU3",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/1AiE6FVtLk0EOQJGTliqlV/tracks",
+        "total": 10
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:1AiE6FVtLk0EOQJGTliqlV"
+    },
+    {
+      "collaborative": false,
+      "description": "Playlist created by the tutorial on developer.spotify.com",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/3Qh1t8iRYXYXlCzG9ADin1"
+      },
+      "href": "https://api.spotify.com/v1/playlists/3Qh1t8iRYXYXlCzG9ADin1",
+      "id": "3Qh1t8iRYXYXlCzG9ADin1",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/ab67616d0000b27306e653440a53354d6a4d71c0ab67616d0000b273a6255d1a4601451957855874ab67616d0000b273cd9010694a16e5ec27f6cec0ab67616d0000b273e1e350d06ffebd2e19e047ce",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/ab67616d0000b27306e653440a53354d6a4d71c0ab67616d0000b273a6255d1a4601451957855874ab67616d0000b273cd9010694a16e5ec27f6cec0ab67616d0000b273e1e350d06ffebd2e19e047ce",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/ab67616d0000b27306e653440a53354d6a4d71c0ab67616d0000b273a6255d1a4601451957855874ab67616d0000b273cd9010694a16e5ec27f6cec0ab67616d0000b273e1e350d06ffebd2e19e047ce",
+          "width": 60
+        }
+      ],
+      "name": "My recommendation playlist",
+      "owner": {
+        "display_name": "Jonathan Lind",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/thelindd3"
+        },
+        "href": "https://api.spotify.com/v1/users/thelindd3",
+        "id": "thelindd3",
+        "type": "user",
+        "uri": "spotify:user:thelindd3"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "NCwwODgzMDYxMTM1MjFjMDVjMDU2ZmQwODAzZTQyNjZkYWYxNzg5ZGI0",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/3Qh1t8iRYXYXlCzG9ADin1/tracks",
+        "total": 10
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:3Qh1t8iRYXYXlCzG9ADin1"
+    },
+    {
+      "collaborative": false,
+      "description": "Songs you love right now",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/37i9dQZF1EpsZpEDkMCVKg"
+      },
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1EpsZpEDkMCVKg",
+      "id": "37i9dQZF1EpsZpEDkMCVKg",
+      "images": [
+        {
+          "height": null,
+          "url": "https://daily-mix.scdn.co/covers/on_repeat/PZN_On_Repeat2_LARGE-en.jpg",
+          "width": null
+        }
+      ],
+      "name": "On Repeat",
+      "owner": {
+        "display_name": "Spotify",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/spotify"
+        },
+        "href": "https://api.spotify.com/v1/users/spotify",
+        "id": "spotify",
+        "type": "user",
+        "uri": "spotify:user:spotify"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "MTcwMTA1Mjk2MSwwMDAwMDAwMDNkMzk4MWVhMzhkMzUwNWE4N2FmYTE1YWFkNzkyMjY1",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/37i9dQZF1EpsZpEDkMCVKg/tracks",
+        "total": 30
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:37i9dQZF1EpsZpEDkMCVKg"
+    },
+    {
+      "collaborative": false,
+      "description": "00-talet, ny teknologi, super-producenter och massor av hits.",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/37i9dQZF1DXdyYEYhToczp"
+      },
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DXdyYEYhToczp",
+      "id": "37i9dQZF1DXdyYEYhToczp",
+      "images": [
+        {
+          "height": null,
+          "url": "https://i.scdn.co/image/ab67706f0000000375c094fe7a75d4c5914f0879",
+          "width": null
+        }
+      ],
+      "name": "Det svenska NollNolltalet",
+      "owner": {
+        "display_name": "Spotify",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/spotify"
+        },
+        "href": "https://api.spotify.com/v1/users/spotify",
+        "id": "spotify",
+        "type": "user",
+        "uri": "spotify:user:spotify"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "MTY4NjkxODAzMSwwMDAwMDAwMGI2NTYwNzQ2MjBmYjZkMjc4ZmVjNGJiZWY5Zjk4NjQx",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DXdyYEYhToczp/tracks",
+        "total": 50
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:37i9dQZF1DXdyYEYhToczp"
+    },
+    {
+      "collaborative": false,
+      "description": "The best metal songs of the 2010s. Cover: Avenged Sevenfold",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWUnhhRs5u3TO"
+      },
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWUnhhRs5u3TO",
+      "id": "37i9dQZF1DWUnhhRs5u3TO",
+      "images": [
+        {
+          "height": null,
+          "url": "https://i.scdn.co/image/ab67706f000000035cb61911ba4ccd3cdaaadcee",
+          "width": null
+        }
+      ],
+      "name": "10s Metal Classics",
+      "owner": {
+        "display_name": "Spotify",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/spotify"
+        },
+        "href": "https://api.spotify.com/v1/users/spotify",
+        "id": "spotify",
+        "type": "user",
+        "uri": "spotify:user:spotify"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "MTY4NjkyMDUzOSwwMDAwMDAwMGRlNDYxNGRkM2MzN2RiYjI3NzhhYjAyNzJhZmEzYzRl",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWUnhhRs5u3TO/tracks",
+        "total": 75
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:37i9dQZF1DWUnhhRs5u3TO"
+    },
+    {
+      "collaborative": false,
+      "description": "have yourself a chill and lofi xmas",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWYK8AUzwi00m"
+      },
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWYK8AUzwi00m",
+      "id": "37i9dQZF1DWYK8AUzwi00m",
+      "images": [
+        {
+          "height": null,
+          "url": "https://i.scdn.co/image/ab67706f0000000377bcc6a762c106b74db9c281",
+          "width": null
+        }
+      ],
+      "name": "A Merry Lofi Christmas",
+      "owner": {
+        "display_name": "Spotify",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/spotify"
+        },
+        "href": "https://api.spotify.com/v1/users/spotify",
+        "id": "spotify",
+        "type": "user",
+        "uri": "spotify:user:spotify"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "MTcwMTE3MzkyMiwwMDAwMDAwMDlhOTcyZTFhOGQ5Nzg2OWYyMDc2ODc3YjcwMmE0MTQ5",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWYK8AUzwi00m/tracks",
+        "total": 180
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:37i9dQZF1DWYK8AUzwi00m"
+    },
+    {
+      "collaborative": false,
+      "description": "Spotify Wrapped presents the songs that you loved most this year.",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/37i9dQZF1F0sijgNaJdgit"
+      },
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1F0sijgNaJdgit",
+      "id": "37i9dQZF1F0sijgNaJdgit",
+      "images": [
+        {
+          "height": null,
+          "url": "https://wrapped-images.spotifycdn.com/image/yts-2022/large/your-top-songs-2022_large_en.jpg",
+          "width": null
+        }
+      ],
+      "name": "Your Top Songs 2022",
+      "owner": {
+        "display_name": "Spotify",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/spotify"
+        },
+        "href": "https://api.spotify.com/v1/users/spotify",
+        "id": "spotify",
+        "type": "user",
+        "uri": "spotify:user:spotify"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "MTY2OTkwODk2MiwwMDAwMDAwMGIwYjY1YjMyNjI3ZDRjNzIzZjlkOGYyMzVkY2RjNzc5",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/37i9dQZF1F0sijgNaJdgit/tracks",
+        "total": 101
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:37i9dQZF1F0sijgNaJdgit"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/2PUiOi3i9cSYMu1MyhIhht"
+      },
+      "href": "https://api.spotify.com/v1/playlists/2PUiOi3i9cSYMu1MyhIhht",
+      "id": "2PUiOi3i9cSYMu1MyhIhht",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab67616d0000b273db8507c0d809e10f0cfe35aa",
+          "width": 640
+        }
+      ],
+      "name": "MOTIVATION",
+      "owner": {
+        "display_name": "Jonathan Lind",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/thelindd3"
+        },
+        "href": "https://api.spotify.com/v1/users/thelindd3",
+        "id": "thelindd3",
+        "type": "user",
+        "uri": "spotify:user:thelindd3"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "NCwyZDkyZmRkOGMwZjMyYTY5NDlkOTdjMTU0MzgzN2Y0MjAzMDExNzIy",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/2PUiOi3i9cSYMu1MyhIhht/tracks",
+        "total": 2
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:2PUiOi3i9cSYMu1MyhIhht"
+    },
+    {
+      "collaborative": false,
+      "description": "The official Playlist for everything your hear around ESL CS:GO! #ESL #ESLCSGO #Esports #Gaming #CSGO #IEM",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/5twuCRBQQ1mSKFjll6oFxP"
+      },
+      "href": "https://api.spotify.com/v1/playlists/5twuCRBQQ1mSKFjll6oFxP",
+      "id": "5twuCRBQQ1mSKFjll6oFxP",
+      "images": [
+        {
+          "height": null,
+          "url": "https://image-cdn-fa.spotifycdn.com/image/ab67706c0000bebb67875dbe7289e86352f5856c",
+          "width": null
+        }
+      ],
+      "name": "ESL CS:GO Playlist",
+      "owner": {
+        "display_name": "ESL Gaming",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/d60cwzx75anex41h6zilf1j1i"
+        },
+        "href": "https://api.spotify.com/v1/users/d60cwzx75anex41h6zilf1j1i",
+        "id": "d60cwzx75anex41h6zilf1j1i",
+        "type": "user",
+        "uri": "spotify:user:d60cwzx75anex41h6zilf1j1i"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MTI5MCw1Njg4YzU1ZWI2N2RhNzI2OWFhMWYwNmFiNDM2YzQzMTc1NzczNzE5",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/5twuCRBQQ1mSKFjll6oFxP/tracks",
+        "total": 36
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:5twuCRBQQ1mSKFjll6oFxP"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/1G6bMEo65AObAHXumaRfcU"
+      },
+      "href": "https://api.spotify.com/v1/playlists/1G6bMEo65AObAHXumaRfcU",
+      "id": "1G6bMEo65AObAHXumaRfcU",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab67616d0000b273e2c5652833c13a01afe17c9c",
+          "width": 640
+        }
+      ],
+      "name": "My Playlist #16",
+      "owner": {
+        "display_name": "Jonathan Lind",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/thelindd3"
+        },
+        "href": "https://api.spotify.com/v1/users/thelindd3",
+        "id": "thelindd3",
+        "type": "user",
+        "uri": "spotify:user:thelindd3"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MixjYzUxNjljNzc3ZThkZDUyOTA3N2JjMmVlMWYzM2QwNGVjOGRiNjNl",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/1G6bMEo65AObAHXumaRfcU/tracks",
+        "total": 1
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:1G6bMEo65AObAHXumaRfcU"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/74JH5NwZsNmeDVT9lBTgGM"
+      },
+      "href": "https://api.spotify.com/v1/playlists/74JH5NwZsNmeDVT9lBTgGM",
+      "id": "74JH5NwZsNmeDVT9lBTgGM",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/ab67616d0000b27316326d32baec338feac8f530ab67616d0000b2738d6d818fe92a139e499a4585ab67616d0000b2739432fbf9a72460f9e79ffed1ab67616d0000b273df239e2378931afd5f2e8ef2",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/ab67616d0000b27316326d32baec338feac8f530ab67616d0000b2738d6d818fe92a139e499a4585ab67616d0000b2739432fbf9a72460f9e79ffed1ab67616d0000b273df239e2378931afd5f2e8ef2",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/ab67616d0000b27316326d32baec338feac8f530ab67616d0000b2738d6d818fe92a139e499a4585ab67616d0000b2739432fbf9a72460f9e79ffed1ab67616d0000b273df239e2378931afd5f2e8ef2",
+          "width": 60
+        }
+      ],
+      "name": "vibe",
+      "owner": {
+        "display_name": "Jonathan Lind",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/thelindd3"
+        },
+        "href": "https://api.spotify.com/v1/users/thelindd3",
+        "id": "thelindd3",
+        "type": "user",
+        "uri": "spotify:user:thelindd3"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MzIsMWQzODkwNzFlMjViN2M5NGMyODVmY2I0MDliNzM2YzdjZDg3OGQyMw==",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/74JH5NwZsNmeDVT9lBTgGM/tracks",
+        "total": 29
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:74JH5NwZsNmeDVT9lBTgGM"
+    },
+    {
+      "collaborative": false,
+      "description": "<a href=spotify:playlist:37i9dQZF1EIWHcQid2mEQY>Sabaton</a>, <a href=spotify:playlist:37i9dQZF1EIUS2kg1I0yB7>Skar</a>, <a href=spotify:playlist:37i9dQZF1EIVwAo1rGIoCz>ENMY</a> and more",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/37i9dQZF1EQpgT26jgbgRI"
+      },
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1EQpgT26jgbgRI",
+      "id": "37i9dQZF1EQpgT26jgbgRI",
+      "images": [
+        {
+          "height": null,
+          "url": "https://seed-mix-image.spotifycdn.com/v6/img/metal/3o2dn2O0FCVsWDFSh8qxgG/en/large",
+          "width": null
+        }
+      ],
+      "name": "Metal Mix",
+      "owner": {
+        "display_name": "Spotify",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/spotify"
+        },
+        "href": "https://api.spotify.com/v1/users/spotify",
+        "id": "spotify",
+        "type": "user",
+        "uri": "spotify:user:spotify"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "MTcwMTIzNzYwMCwwMDAwMDAwMGQ2NWJjYjM1ZjQyNDEwMjM2OTQ4NTlkZTE5OGY0ODA5",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/37i9dQZF1EQpgT26jgbgRI/tracks",
+        "total": 50
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:37i9dQZF1EQpgT26jgbgRI"
+    },
+    {
+      "collaborative": false,
+      "description": "Hits to boost your mood and fill you with happiness!",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/37i9dQZF1DXdPec7aLTmlC"
+      },
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DXdPec7aLTmlC",
+      "id": "37i9dQZF1DXdPec7aLTmlC",
+      "images": [
+        {
+          "height": null,
+          "url": "https://i.scdn.co/image/ab67706f000000039796b80fc12cc5e8b14326a5",
+          "width": null
+        }
+      ],
+      "name": "Happy Hits!",
+      "owner": {
+        "display_name": "Spotify",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/spotify"
+        },
+        "href": "https://api.spotify.com/v1/users/spotify",
+        "id": "spotify",
+        "type": "user",
+        "uri": "spotify:user:spotify"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "MTcwMDU2ODI3MCwwMDAwMDAwMDllMThmMjE0MTc5MDgwOTgzOGViMDczMTg1MjhiYTlj",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DXdPec7aLTmlC/tracks",
+        "total": 100
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:37i9dQZF1DXdPec7aLTmlC"
+    },
+    {
+      "collaborative": false,
+      "description": "Spotify Wrapped presents the songs that you loved most this year.",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/37i9dQZF1EUMDoJuT8yJsl"
+      },
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1EUMDoJuT8yJsl",
+      "id": "37i9dQZF1EUMDoJuT8yJsl",
+      "images": [
+        {
+          "height": null,
+          "url": "https://lineup-images.scdn.co/wrapped-2021-top100_LARGE-en.jpg",
+          "width": null
+        }
+      ],
+      "name": "Your Top Songs 2021",
+      "owner": {
+        "display_name": "Spotify",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/spotify"
+        },
+        "href": "https://api.spotify.com/v1/users/spotify",
+        "id": "spotify",
+        "type": "user",
+        "uri": "spotify:user:spotify"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "MCwwMDAwMDAwMDgwNTE2MTZlYWZjNjk0MGRkZmY4N2ViYWJkNDdhOWI4",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/37i9dQZF1EUMDoJuT8yJsl/tracks",
+        "total": 100
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:37i9dQZF1EUMDoJuT8yJsl"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/2ePwJXrhQoIZeRjAkVJVzb"
+      },
+      "href": "https://api.spotify.com/v1/playlists/2ePwJXrhQoIZeRjAkVJVzb",
+      "id": "2ePwJXrhQoIZeRjAkVJVzb",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/ab67616d0000b27319ab0322a8398e81afeb0182ab67616d0000b2732943fff355e2825acb40af06ab67616d0000b2733492c68445c4135f4aa27105ab67616d0000b2737f6862b4f3a1da4dc8829fe7",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/ab67616d0000b27319ab0322a8398e81afeb0182ab67616d0000b2732943fff355e2825acb40af06ab67616d0000b2733492c68445c4135f4aa27105ab67616d0000b2737f6862b4f3a1da4dc8829fe7",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/ab67616d0000b27319ab0322a8398e81afeb0182ab67616d0000b2732943fff355e2825acb40af06ab67616d0000b2733492c68445c4135f4aa27105ab67616d0000b2737f6862b4f3a1da4dc8829fe7",
+          "width": 60
+        }
+      ],
+      "name": "Dr. Stone OST",
+      "owner": {
+        "display_name": "Xia Xin Lu",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/cho627"
+        },
+        "href": "https://api.spotify.com/v1/users/cho627",
+        "id": "cho627",
+        "type": "user",
+        "uri": "spotify:user:cho627"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "MTMsZGE4MWQzZmU5YjVlMGJlMDVlYmQ1NThhODJhMDc3OWE0ZTkzODVlZg==",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/2ePwJXrhQoIZeRjAkVJVzb/tracks",
+        "total": 173
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:2ePwJXrhQoIZeRjAkVJVzb"
+    },
+    {
+      "collaborative": false,
+      "description": "The songs you loved most this year, all wrapped up.",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/37i9dQZF1EM25sQe7ieWje"
+      },
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1EM25sQe7ieWje",
+      "id": "37i9dQZF1EM25sQe7ieWje",
+      "images": [
+        {
+          "height": null,
+          "url": "https://lineup-images.scdn.co/wrapped-2020-top100_LARGE-en.jpg",
+          "width": null
+        }
+      ],
+      "name": "Your Top Songs 2020",
+      "owner": {
+        "display_name": "Spotify",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/spotify"
+        },
+        "href": "https://api.spotify.com/v1/users/spotify",
+        "id": "spotify",
+        "type": "user",
+        "uri": "spotify:user:spotify"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "MjY3NzQ1NTYsMDAwMDAwMDA0MjQzZDcxOGI2ZDM1MDM0N2Y5ZjkyMjExMTBiMWZlMg==",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/37i9dQZF1EM25sQe7ieWje/tracks",
+        "total": 100
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:37i9dQZF1EM25sQe7ieWje"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/0zZBhMs0bVYEUPLEu2VnMm"
+      },
+      "href": "https://api.spotify.com/v1/playlists/0zZBhMs0bVYEUPLEu2VnMm",
+      "id": "0zZBhMs0bVYEUPLEu2VnMm",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/ab67616d0000b2731bb1db39abc18755d7ab2114ab67616d0000b2737282412ad025c14f7039f516ab67616d0000b273890ce61533a89e00ce593fcbab67616d0000b27397e3ca5aecb464f021c601d5",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/ab67616d0000b2731bb1db39abc18755d7ab2114ab67616d0000b2737282412ad025c14f7039f516ab67616d0000b273890ce61533a89e00ce593fcbab67616d0000b27397e3ca5aecb464f021c601d5",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/ab67616d0000b2731bb1db39abc18755d7ab2114ab67616d0000b2737282412ad025c14f7039f516ab67616d0000b273890ce61533a89e00ce593fcbab67616d0000b27397e3ca5aecb464f021c601d5",
+          "width": 60
+        }
+      ],
+      "name": "Jype",
+      "owner": {
+        "display_name": "Jonathan Lind",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/thelindd3"
+        },
+        "href": "https://api.spotify.com/v1/users/thelindd3",
+        "id": "thelindd3",
+        "type": "user",
+        "uri": "spotify:user:thelindd3"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "MjgsZDJmZTZhMzk3MDRhNDU4NDg0YjFiMmMwOTQ5MDY0M2M2YjgyYmU2Yg==",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/0zZBhMs0bVYEUPLEu2VnMm/tracks",
+        "total": 25
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:0zZBhMs0bVYEUPLEu2VnMm"
+    },
+    {
+      "collaborative": false,
+      "description": "",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/4a1q6VwMHbmKGcoZruf8s6"
+      },
+      "href": "https://api.spotify.com/v1/playlists/4a1q6VwMHbmKGcoZruf8s6",
+      "id": "4a1q6VwMHbmKGcoZruf8s6",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://mosaic.scdn.co/640/ab67616d0000b273730dc61a14921f999a79eb92ab67616d0000b2738c7a8e68dc5c20bb72f713f2ab67616d0000b27396c799b97ad8d8be2d315dd0ab67616d0000b273e4d95c25345d71b67d0a912a",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://mosaic.scdn.co/300/ab67616d0000b273730dc61a14921f999a79eb92ab67616d0000b2738c7a8e68dc5c20bb72f713f2ab67616d0000b27396c799b97ad8d8be2d315dd0ab67616d0000b273e4d95c25345d71b67d0a912a",
+          "width": 300
+        },
+        {
+          "height": 60,
+          "url": "https://mosaic.scdn.co/60/ab67616d0000b273730dc61a14921f999a79eb92ab67616d0000b2738c7a8e68dc5c20bb72f713f2ab67616d0000b27396c799b97ad8d8be2d315dd0ab67616d0000b273e4d95c25345d71b67d0a912a",
+          "width": 60
+        }
+      ],
+      "name": "Hip hoppin",
+      "owner": {
+        "display_name": "Jonathan Lind",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/thelindd3"
+        },
+        "href": "https://api.spotify.com/v1/users/thelindd3",
+        "id": "thelindd3",
+        "type": "user",
+        "uri": "spotify:user:thelindd3"
+      },
+      "primary_color": null,
+      "public": true,
+      "snapshot_id": "NTAsOTYzMDcxODdlMWQ2ODAwNjc0YzlkY2EyZTM5NjI1OTQ5ZWUyYmY0ZQ==",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/4a1q6VwMHbmKGcoZruf8s6/tracks",
+        "total": 49
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:4a1q6VwMHbmKGcoZruf8s6"
+    },
+    {
+      "collaborative": false,
+      "description": "Real rap music from the golden era.\n",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX186v583rmzp"
+      },
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX186v583rmzp",
+      "id": "37i9dQZF1DX186v583rmzp",
+      "images": [
+        {
+          "height": null,
+          "url": "https://i.scdn.co/image/ab67706f00000003b5e5274fbae4bcf84bf57f69",
+          "width": null
+        }
+      ],
+      "name": "I Love My '90s Hip-Hop",
+      "owner": {
+        "display_name": "Spotify",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/spotify"
+        },
+        "href": "https://api.spotify.com/v1/users/spotify",
+        "id": "spotify",
+        "type": "user",
+        "uri": "spotify:user:spotify"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "MTcwMDc4MDQ2MCwwMDAwMDAwMDViYmFlOWRhNDM4YjA5ZWZiYTQ0ZTNjMmRjOGZiYTM3",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX186v583rmzp/tracks",
+        "total": 100
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:37i9dQZF1DX186v583rmzp"
+    },
+    {
+      "collaborative": false,
+      "description": "We made you a personalized playlist with songs to take you back in time.",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/37i9dQZF1Euze7zHqXdkis"
+      },
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1Euze7zHqXdkis",
+      "id": "37i9dQZF1Euze7zHqXdkis",
+      "images": [
+        {
+          "height": null,
+          "url": "https://daily-mix.scdn.co/covers/time-capsule/time-capsule-blue_LARGE-en.jpg",
+          "width": null
+        }
+      ],
+      "name": "Your Time Capsule",
+      "owner": {
+        "display_name": "Spotify",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/spotify"
+        },
+        "href": "https://api.spotify.com/v1/users/spotify",
+        "id": "spotify",
+        "type": "user",
+        "uri": "spotify:user:spotify"
+      },
+      "primary_color": null,
+      "public": false,
+      "snapshot_id": "MTcwMTIxNjAwMCwwMDAwMDAwMDQ4YjgyNTc2M2JkYzQzMTE5ZDEyMWE2MzQ1NjAyNDkz",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/37i9dQZF1Euze7zHqXdkis/tracks",
+        "total": 0
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:37i9dQZF1Euze7zHqXdkis"
+    }
+  ]
+}

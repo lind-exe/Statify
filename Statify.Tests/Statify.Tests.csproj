@@ -27,8 +27,4 @@
     <ProjectReference Include="..\Statify\Statify.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
 </Project>

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Moq;
 using Statify.Interfaces;
@@ -11,52 +12,72 @@ namespace Statify.Tests
     public class AuthorizationTests
     {
         [Fact]
-        public void CheckIfGenerateCodeChallengIsNotEmpty()
+        public void CheckIfGenerateCodeChallengeIsNotEmpty()
         {
             // Arrange
-            var auth = new AuthorizationService();
+            var httpContext = new DefaultHttpContext();
+            httpContext.Session = new MockSession();
+
+            var httpContextAccessor = new Mock<IHttpContextAccessor>();
+            httpContextAccessor.Setup(x => x.HttpContext).Returns(httpContext);
+
+            var auth = new AuthorizationService(httpContextAccessor.Object);
 
             // Act
             auth.GenerateCodeChallenge();
 
             // Assert
-            Assert.False(string.IsNullOrWhiteSpace(SpotifyApiCodes.CodeChallenge));
+            Assert.NotNull(auth.SpotifyApiCodes);
+            Assert.False(string.IsNullOrWhiteSpace(auth.SpotifyApiCodes.CodeChallenge));
         }
+
 
         [Fact]
         public void CanGenerateCodeChallengeWithCorrectLength()
         {
             // Arrange
-            var auth = new AuthorizationService();
+            var httpContext = new DefaultHttpContext();
+            httpContext.Session = new MockSession();
+
+            var httpContextAccessor = new Mock<IHttpContextAccessor>();
+            httpContextAccessor.Setup(x => x.HttpContext).Returns(httpContext);
+
+            var auth = new AuthorizationService(httpContextAccessor.Object);
 
             // Act
             auth.GenerateCodeChallenge();
             const int expectedLength = 43;
 
             // Assert
-            Assert.Equal(expectedLength, SpotifyApiCodes.CodeChallenge!.Length);
+            Assert.Equal(expectedLength, auth.SpotifyApiCodes?.CodeChallenge?.Length);
         }
 
         [Fact]
         public void GenerateCodeChallengeHasValidCharacters()
         {
             // Arrange
-            var auth = new AuthorizationService();
+            var httpContext = new DefaultHttpContext();
+            httpContext.Session = new MockSession();
+
+            var httpContextAccessor = new Mock<IHttpContextAccessor>();
+            httpContextAccessor.Setup(x => x.HttpContext).Returns(httpContext);
+
+            var auth = new AuthorizationService(httpContextAccessor.Object);
 
             // Act
             auth.GenerateCodeChallenge();
 
             // Assert
-            Assert.Matches("^[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_]+$", SpotifyApiCodes.CodeChallenge);
+            Assert.Matches("^[-A-Za-z0-9_]+$", auth.SpotifyApiCodes?.CodeChallenge);
         }
-
 
         [Fact]
         public void CanGenerateRandomCodeChallengeStringOfCorrectLength()
         {
             // Arrange
             var length = 10;
-            var auth = new AuthorizationService();
+            var httpContextAccessor = new Mock<IHttpContextAccessor>();
+            var auth = new AuthorizationService(httpContextAccessor.Object);
 
             // Act
             var actual = auth.GenerateRandomString(length);
@@ -69,14 +90,14 @@ namespace Statify.Tests
         [InlineData("testCode", "aGG0q7q5D_-PRv9Vfa9KIfL3Xar-2tMKpUxUvpUevws")]
         [InlineData("testCode2", "k1RlPgEThBlzlJz3ra1rPY1MK4j3qkE3Kj3yDuCz2wo")]
         [InlineData("", "")]
-
         public void CanGenerateCodeChallengeAndReturnExpectedCode(string codeVerifier, string expectedCode)
         {
             // Arrange
-            var codeGenerator = new AuthorizationService();
+            var httpContextAccessor = new Mock<IHttpContextAccessor>();
+            var auth = new AuthorizationService(httpContextAccessor.Object);
 
             // Act
-            var codeChallenge = codeGenerator.GenerateCodeChallenge(codeVerifier);
+            var codeChallenge = auth.GenerateCodeChallenge(codeVerifier);
 
             // Assert
             Assert.Equal(expectedCode, codeChallenge);
@@ -86,13 +107,14 @@ namespace Statify.Tests
         public async Task ReplaceWithTimeoutWhenTimeoutOccurredThenReturnsTimeoutMessage()
         {
             // Arrange
-            string input = "Just/some/text"; 
-            string pattern = "\\/"; 
+            string input = "Just/some/text";
+            string pattern = "\\/";
             string replacement = "_";
 
             int timeoutMs = 10; // Timeout set to 10 milliseconds for testing
 
-            var methodUnderTest = new AuthorizationService(); 
+            var httpContextAccessor = new Mock<IHttpContextAccessor>();
+            var methodUnderTest = new AuthorizationService(httpContextAccessor.Object);
 
             // Act
             var task = Task.Run(() => methodUnderTest.ReplaceWithTimeout(input, pattern, replacement));
@@ -110,7 +132,5 @@ namespace Statify.Tests
                 Assert.NotEqual("Timeout occurred during regex operation", task.Result);
             }
         }
-
-      
     }
 }

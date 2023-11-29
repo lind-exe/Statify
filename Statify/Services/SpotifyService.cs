@@ -15,6 +15,7 @@ namespace Statify.Services
         private readonly Interfaces.IAuthorizationService _authorizationService;
         private const string RedirectUri = "https://localhost:7274";
         public PkceAuthorization? Authentication { get; set; }
+        public SpotifyApiCodes? SpotifyCodes { get; set; } = new();
 
 
         public SpotifyService(IHttpContextAccessor httpContextAccessor, Interfaces.IAuthorizationService authorizationService)
@@ -22,7 +23,7 @@ namespace Statify.Services
             _httpContextAccessor = httpContextAccessor;
             _authorizationService = authorizationService;
         }
-        public async Task<T> SendSpotifyApiRequest<T>(string endpoint)
+        public async Task<T> SendRequest<T>(string endpoint)
         {
             Authentication = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<PkceAuthorization>("User");
 
@@ -59,7 +60,8 @@ namespace Statify.Services
        
         public async Task ExchangeCodeForTokenAsync(string code)
         {
-            Authentication = _httpContextAccessor.HttpContext.Session.GetObjectFromJson<PkceAuthorization>("User");
+            Authentication = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<PkceAuthorization>("User");
+            SpotifyCodes = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<SpotifyApiCodes>("SpotifyApiCodes");
 
             using var httpClient = new HttpClient();
             var tokenRequest = new Dictionary<string, string>
@@ -68,7 +70,7 @@ namespace Statify.Services
                 { "grant_type", "authorization_code" },
                 { "code", code },
                 { "redirect_uri", RedirectUri },
-                { "code_verifier", SpotifyApiCodes.CodeVerifier! },
+                { "code_verifier", SpotifyCodes!.CodeVerifier! },
             };
 
             var content = new FormUrlEncodedContent(tokenRequest);

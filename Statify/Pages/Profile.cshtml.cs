@@ -21,7 +21,7 @@ namespace Statify.Pages
         {
             Playlists = new PlayListCollection();
             User = new();
-            User = await _userService.GetUserFromSpotifyWithWebApi();
+            User = await _userService.GetUser();
             Playlists = await _userService.GetPlaylists();
 
         }
