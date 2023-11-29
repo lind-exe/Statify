@@ -55,8 +55,10 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"lind-exe_Statify" /o:"lind-exe" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
         
-          dotnet build --configuration Release
-          dotnet test --collect:"XPlat Code Coverage"
+          dotnet build --no-incremental
+          dotnet test # Run your tests
+          # Collect coverage using dotnet-coverage in Cobertura format and output to coverage.xml
+          dotnet-coverage collect "dotnet test" -f cobertura -o "coverage.xml"
           # Display content of coverage.xml for debugging purposes (optional)
           Get-Content -Path "coverage.xml"
          
