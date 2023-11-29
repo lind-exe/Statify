@@ -56,10 +56,16 @@ jobs:
           dotnet build --no-incremental
           dotnet test # Run your tests
 
-          dotnet-coverage collect "dotnet test" -f cobertura -o "coverage.xml" || exit 0
+           # Collect coverage using dotnet-coverage in Cobertura format and output to coverage.xml
+          dotnet-coverage collect "dotnet test" -f cobertura -o "coverage.xml"
+
+          # Check exit code of the coverage collection command
+          if ($LastExitCode -ne 0) {
+            Write-Host "Failed to collect coverage. Continuing without failing the workflow."
+          }
 
           # Display content of coverage.xml for debugging purposes (optional)
-          cat coverage.xml
+          Get-Content -Path "coverage.xml"
 
           dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
