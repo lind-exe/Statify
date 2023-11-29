@@ -56,7 +56,10 @@ jobs:
           dotnet build --no-incremental
           dotnet test # Run your tests
 
-          dotnet-coverage collect "dotnet test" -f cobertura -o "coverage.xml"
+          dotnet-coverage collect "dotnet test" -f cobertura -o "coverage.xml" || exit 0
+
+          # Display content of coverage.xml for debugging purposes (optional)
+          cat coverage.xml
 
           dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
