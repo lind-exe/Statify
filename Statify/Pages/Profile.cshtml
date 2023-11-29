@@ -20,7 +20,7 @@
 {
     <div class="mx-auto page-container">
 
-        <div class="row text-center my-4">
+        <div class="row text-center pt-4 pb-1">
             <div class="col">
                 <img class="shadow" id="img1" alt="Image1.png" style="width: 225px; height: 225px; border: solid 2px #1259D3;" src="@src">
             </div>
@@ -32,7 +32,12 @@
                 <h1>@Model.User.Country</h1>
                 <br />
                 <h1>Account - @Model.User.Id</h1>
-                <h1>@Model.User.Product user</h1>
+                <h1>
+                    @{
+                        string product = Model.User.Product == "premium" ? "Premium" : "Free";
+                    }
+                    @product user
+                </h1>
             </div>
         </div>
 
@@ -41,31 +46,31 @@
             <h2 class="text-color-accent letter">FOLLOWERS</h2>
         </div>
 
-        <div class="row scrollable-container my-4" style="background-color: #020A17" id="scrollableContainer">
-            <div class="d-flex flex-row overflow-auto hideScroll" id="list">
-                @if (Model.Playlists?.Items?.Any() == true)
+    </div>
+    <div class="row scrollable-container my-4" style="background-color: #020A17" id="scrollableContainer">
+        <div class="ps-0 d-flex flex-row overflow-auto hideScroll" id="list">
+            @if (Model.Playlists?.Items?.Any() == true)
+            {
+                @foreach (var playlist in Model.Playlists.Items)
                 {
-                    @foreach (var playlist in Model.Playlists.Items)
-                    {
-                        <div class="col ms-4 my-4">
-                            <div class="card" style="background-color: #3A7CEE">
-                                <div class="card-body">
-                                    @if (playlist.Images?.Any(x => x.Url is not null) == true)
-                                    {
-                                        var validSrc = playlist.Images.First(x => x.Url is not null)?.Url ?? "";
-                                        <img src="@validSrc" alt="Playlist image" style="height:150px; width:150px">
-                                        <a class="stretched-link" href="@playlist.ExternalUrls!.Spotify" style="z-index:0"></a>
-                                    }
-                                </div>
+                    <div class="col me-4 my-4">
+                        <div class="ms-0 card" style="background-color: #3A7CEE">
+                            <div class="card-body">
+                                @if (playlist.Images?.Any(x => x.Url is not null) == true)
+                                {
+                                    var validSrc = playlist.Images.First(x => x.Url is not null)?.Url ?? "";
+                                    <img src="@validSrc" alt="Playlist image" style="height:150px; width:150px">
+                                    <a class="stretched-link" href="@playlist.ExternalUrls!.Spotify" style="z-index:0"></a>
+                                }
                             </div>
                         </div>
-                    }
+                    </div>
                 }
-                else
-                {
-                    <h1>No playlists found!</h1>
-                }
-            </div>
+            }
+            else
+            {
+                <h1>No playlists found!</h1>
+            }
         </div>
     </div>
 }
