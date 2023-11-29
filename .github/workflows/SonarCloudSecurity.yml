@@ -19,26 +19,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v3
+      
+      - name: sonar-scanner
+  # You may pin to the exact commit or the version.
+  # uses: Warchant/setup-sonar-scanner@72fbd79b3b15c7fc1ca23ef619d7be046681199d
+      - uses: Warchant/setup-sonar-scanner@v7
         with:
-          path: ~\sonar\cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
-      - name: Cache SonarCloud scanner
-        id: cache-sonar-scanner
-        uses: actions/cache@v3
-        with:
-          path: .\.sonar\scanner
-          key: ${{ runner.os }}-sonar-scanner
-          restore-keys: ${{ runner.os }}-sonar-scanner
-
-      - name: Install SonarCloud scanner
-        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-        run: |
-          dotnet tool install --global dotnet-sonarscanner
+          version: 5.0.1.3006
       
       - name: Install dotnet-coverage tool
         run: dotnet tool install --global dotnet-coverage
