@@ -20,13 +20,13 @@ namespace Statify.Services
         }
 
 
-        public async Task<User> GetUserFromSpotifyWithWebApi()
+        public async Task<User> GetUser()
         {
-            return await _spotifyService.SendSpotifyApiRequest<User>("me");
+            return await _spotifyService.SendRequest<User>("me");
         }
         public async Task<PlayListCollection> GetPlaylists(int amount = 20)
         {
-            return await _spotifyService.SendSpotifyApiRequest<PlayListCollection>("me/playlists");
+            return await _spotifyService.SendRequest<PlayListCollection>("me/playlists");
         }
         public Task<List<Track>> FindForgottenTracks()
         {

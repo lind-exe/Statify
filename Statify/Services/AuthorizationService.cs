@@ -7,19 +7,27 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace Statify.Services
 {
-    public sealed class AuthorizationService : IAuthorizationService
+    public class AuthorizationService : IAuthorizationService
     {
         private readonly int GenerateRandomStringLength = 128;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public SpotifyApiCodes SpotifyApiCodes { get; set; }
+
+        public AuthorizationService(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+            SpotifyApiCodes = new();
+        }
+
         private const string RedirectUri = "https://localhost:7274";
         private const string Scope = "user-read-private user-read-email";
 
         public void GenerateCodeChallenge()
         {
+            SpotifyApiCodes.CodeVerifier = GenerateRandomString(GenerateRandomStringLength);
+            SpotifyApiCodes.CodeChallenge = GenerateCodeChallenge(SpotifyApiCodes.CodeVerifier!);
             
-
-
-            SpotifyApiCodes.SetCodeVerifier(GenerateRandomString(GenerateRandomStringLength));
-            SpotifyApiCodes.SetCodeChallenge(GenerateCodeChallenge(SpotifyApiCodes.CodeVerifier!));
+            _httpContextAccessor.HttpContext!.Session.SetObjectAsJson("SpotifyApiCodes", SpotifyApiCodes);
         }
         public string GenerateRandomString(int length)
         {

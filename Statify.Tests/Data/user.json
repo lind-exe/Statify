@@ -1,0 +1,33 @@
+{
+  "country": "SE",
+  "display_name": "Daniel Pettersson",
+  "email": "pettersson_daniel@outlook.com",
+  "explicit_content": {
+    "filter_enabled": false,
+    "filter_locked": false
+  },
+  "external_urls": {
+    "spotify": "https://open.spotify.com/user/dantrew"
+  },
+  "followers": {
+    "href": null,
+    "total": 9
+  },
+  "href": "https://api.spotify.com/v1/users/dantrew",
+  "id": "dantrew",
+  "images": [
+    {
+      "url": "https://scontent-mxp1-1.xx.fbcdn.net/v/t39.30808-1/336679145_860933134999907_7935343076812928285_n.jpg?stp=cp0_dst-jpg_p50x50&_nc_cat=108&ccb=1-7&_nc_sid=4da83f&_nc_ohc=o6UmiEAfIJgAX9KixcF&_nc_ht=scontent-mxp1-1.xx&edm=AP4hL3IEAAAA&oh=00_AfDSqpmqysBkEFAh5Khq81ucWZbzRYk0Va3wIwMQsqkRLQ&oe=656CCC56",
+      "height": 64,
+      "width": 64
+    },
+    {
+      "url": "https://scontent-mxp1-1.xx.fbcdn.net/v/t39.30808-1/336679145_860933134999907_7935343076812928285_n.jpg?stp=dst-jpg_p320x320&_nc_cat=108&ccb=1-7&_nc_sid=9e7101&_nc_ohc=o6UmiEAfIJgAX9KixcF&_nc_ht=scontent-mxp1-1.xx&edm=AP4hL3IEAAAA&oh=00_AfD7sOhQ-cZTmy5Fv6b-X6zFuaYW7J1E-2FNnDe7CziyDQ&oe=656CCC56",
+      "height": 300,
+      "width": 300
+    }
+  ],
+  "product": "premium",
+  "type": "user",
+  "uri": "spotify:user:dantrew"
+}
