@@ -36,6 +36,7 @@ jobs:
           path: .\.sonar\scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
+          
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
@@ -55,17 +56,19 @@ jobs:
           dotnet sonarscanner begin /k:"lind-exe_Statify" /o:"lind-exe" /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
           dotnet build --no-incremental
           dotnet test # Run your tests
-
-           # Collect coverage using dotnet-coverage in Cobertura format and output to coverage.xml
+          
+          # Collect coverage using dotnet-coverage in Cobertura format and output to coverage.xml
           dotnet-coverage collect "dotnet test" -f cobertura -o "coverage.xml"
-
+          
           # Check exit code of the coverage collection command
           if ($LastExitCode -ne 0) {
             Write-Host "Failed to collect coverage. Continuing without failing the workflow."
           }
-
+          
           # Display content of coverage.xml for debugging purposes (optional)
           Get-Content -Path "coverage.xml"
-
+          
+          # End SonarCloud analysis
           dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
 
