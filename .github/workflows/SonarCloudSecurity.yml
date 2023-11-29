@@ -23,7 +23,7 @@ jobs:
       - name: sonar-scanner
   # You may pin to the exact commit or the version.
   # uses: Warchant/setup-sonar-scanner@72fbd79b3b15c7fc1ca23ef619d7be046681199d
-      - uses: Warchant/setup-sonar-scanner@v7
+        uses: Warchant/setup-sonar-scanner@v7
         with:
           version: 5.0.1.3006
       
