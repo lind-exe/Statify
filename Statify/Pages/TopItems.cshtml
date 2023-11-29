@@ -1,0 +1,52 @@
+﻿@page
+@model Statify.Pages.TopItemsModel
+@{
+}
+<h3 class="text-center py-1">Show top Artist & Tracks</h3>
+<div class="mx-auto page-container pb-4">
+
+    <div class="row text-center bg-color">
+        <div class="col m-4">
+            <div class="">
+                <form method="get">
+                    <!-- Dropdown for item type -->
+                    <label for="itemType"></label>
+                    <select id="itemType" name="itemType">
+                        <option value="artists">Artists</option>
+                        <option value="tracks">Tracks</option>
+                    </select>
+
+                    <!-- Dropdown for term -->
+                    <label for="term">Select Term:</label>
+                    <select id="term" name="term">
+                        <option value="short_term">Short Term</option>
+                        <option value="medium_term">Medium Term</option>
+                        <option value="long_term">Long Term</option>
+                    </select>
+
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+
+    @if (Model.TrackCollection is not null && Model.TrackCollection.Items is not null)
+    {
+        foreach (var item in Model.TrackCollection.Items)
+        {
+            <h2>@item.Name</h2>
+            <br />
+        }
+    }
+    @if (Model.ArtistCollection is not null && Model.ArtistCollection.Items is not null)
+    {
+        foreach (var item in Model.ArtistCollection.Items)
+        {
+            <h2>@item.Name</h2>
+            <br />
+        }
+    }
+</div>

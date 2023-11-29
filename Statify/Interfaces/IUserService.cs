@@ -17,6 +17,6 @@ namespace Statify.Interfaces
         /// <param name="amount">number of playlists to return, default 20, max 50</param>
         /// <returns>A deserialized PlayListCollection from json</returns>
         public Task<PlayListCollection> GetPlaylists(int amount = 20);
-
+        public Task<T> GetTopItems<T>(string itemType, string term);
     }
 }

@@ -74,32 +74,3 @@
         </div>
     </div>
 }
-
-<script>
-    $(document).ready(function () {
-        var isMouseDown = false;
-        var startX;
-        var scrollLeft;
-
-        $('#scrollableContainer').mousedown(function (e) {
-            isMouseDown = true;
-            startX = e.pageX - $('#scrollableContainer').offset().left;
-            scrollLeft = $('#scrollableContainer').scrollLeft();
-        });
-
-        $('#scrollableContainer').mouseleave(function () {
-            isMouseDown = false;
-        });
-
-        $(document).mouseup(function () {
-            isMouseDown = false;
-        });
-
-        $('#scrollableContainer').mousemove(function (e) {
-            if (!isMouseDown) return;
-            var x = e.pageX - $('#scrollableContainer').offset().left;
-            var walk = (x - startX) * 3; // Adjust the scrolling speed here
-            $('#scrollableContainer').scrollLeft(scrollLeft - walk);
-        });
-    });
-</script>

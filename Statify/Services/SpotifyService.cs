@@ -47,7 +47,8 @@ namespace Statify.Services
             }
             else
             {
-                throw new HttpRequestException($"Failed to retrieve information from Spotify API. Status code: {response.StatusCode}");
+                string errorContent = await response.Content.ReadAsStringAsync();
+                throw new HttpRequestException($"Failed to retrieve information from Spotify API. Status code: {response.StatusCode}. Error content: {errorContent}");
             }
         }
         public string AuthorizeUser()
@@ -94,5 +95,10 @@ namespace Statify.Services
 
             }
         }
+        public async Task<T> GetTopItems<T>(string itemType, string term)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
