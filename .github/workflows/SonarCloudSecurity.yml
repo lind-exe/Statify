@@ -40,6 +40,9 @@ jobs:
         run: |
           dotnet tool install --global dotnet-sonarscanner
 
+      - name: Verify dotnet-sonarscanner installation
+        run: dotnet sonarscanner --version
+
       - name: Install dotnet-coverage tool
         run: dotnet tool install --global dotnet-coverage
 
