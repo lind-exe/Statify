@@ -1,0 +1,9 @@
+﻿@page
+@model Statify.Pages.StatisticsModel
+@{
+}
+
+@foreach (var item in Model.AllGenres!.Genres)
+{
+    <h1>@item</h1>
+}

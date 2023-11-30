@@ -34,7 +34,7 @@ namespace Statify.Services
 
             throw new NotImplementedException();
         }
-        public async Task<T> GetTopItems<T>(string itemType, string term)
+        public async Task<T> GetTopItems<T>(string itemType, string term, int amount = 20)
         {
             return await _spotifyService.SendRequest<T>($"me/top/{itemType}?time_range={term}");
         }

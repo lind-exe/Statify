@@ -17,6 +17,14 @@ namespace Statify.Interfaces
         /// <param name="amount">number of playlists to return, default 20, max 50</param>
         /// <returns>A deserialized PlayListCollection from json</returns>
         public Task<PlayListCollection> GetPlaylists(int amount = 20);
-        public Task<T> GetTopItems<T>(string itemType, string term);
+        /// <summary>
+        /// Send API request to spotify to retrieve top {count} items, either TrackCollection or ArtistCollection. Term = short_term, medium_term or long_term. Default count 20
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="itemType"></param>
+        /// <param name="term"></param>
+        /// <param name="count"></param>
+        /// <returns>top {count} artists or tracks for the specified term.</returns>
+        public Task<T> GetTopItems<T>(string itemType, string term, int count = 20);
     }
 }
