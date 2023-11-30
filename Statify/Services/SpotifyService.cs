@@ -89,16 +89,6 @@ namespace Statify.Services
                     _httpContextAccessor.HttpContext.Session.SetObjectAsJson("User", Authentication);
                 }
             }
-            else
-            {
-                // Handle the error, log the response, etc.
-
-            }
         }
-        public async Task<T> GetTopItems<T>(string itemType, string term)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

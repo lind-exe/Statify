@@ -8,15 +8,13 @@ namespace Statify.Pages
 {
     public class TopItemsModel : PageModel
     {
-        private readonly ISpotifyService _spotifyService;
         private readonly IUserService _userService;
-        public TrackCollection TrackCollection { get; set; }
-        public ArtistCollection ArtistCollection { get; set; }
+        public TrackCollection? TrackCollection { get; set; }
+        public ArtistCollection? ArtistCollection { get; set; }
 
 
-        public TopItemsModel(ISpotifyService spotifyService, IUserService userService)
+        public TopItemsModel(IUserService userService)
         {
-            _spotifyService = spotifyService;
             _userService = userService;
         }
 
