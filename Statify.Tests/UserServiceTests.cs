@@ -8,8 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using static Statify.Models.PlayListCollection;
+
 
 namespace Statify.Tests
 {
@@ -56,25 +55,47 @@ namespace Statify.Tests
             Assert.NotNull(actual);
             Assert.Equal(expectedUser!.Id, actual.Id);
         }
+        [Fact]
+        public async Task SendSpotifyApiRequestReturnsTopTracks()
+        {
+            // Arrange
+            var expectedCount = 20;
+            var expectedResponseJson = File.ReadAllText("../../../Data/toptracks.json");
+            var expectedTracks = JsonSerializer.Deserialize<TrackCollection>(expectedResponseJson);
 
-        //[Fact]
-        //public void TestingTracks()
-        //{
-        //    // Arrange
-        //    // This should read from a file.
-        //    var json = "";
-        //    //var tracks = JsonSerializer.Deserialize<Track>(json);
-        //    var expected = new Track();
-        //    var mock = new Mock<ISpotifyService>();
+            var mock = new Mock<ISpotifyService>();
 
-        //    //mock.Setup(x => x.SendSpotifyApiRequest<Track>(It.IsAny<string>()).Result).Returns(tracks);
-        //    var userService = new UserService(mock.Object);
+            mock.Setup(x => x.SendRequest<TrackCollection>(It.IsAny<string>()).Result).Returns(expectedTracks!);
+            var userService = new UserService(mock.Object);
 
-        //    // Act
-        //    var actual = userService.FindForgottenTracks();
+            // Act
+            var actual = await userService.GetTopItems<TrackCollection>("tracks", "medium_term");
 
-        //    // Assert
-        //    //actual = expected
-        //}
+            // Assert
+            Assert.NotNull(actual);
+            Assert.Equal(expectedTracks!.Items![0].Id, actual.Items![0].Id);
+            Assert.Equal(expectedCount, actual.Items.Count);
+        }
+        [Fact]
+        public async Task SendSpotifyApiRequestReturnsTopArtists()
+        {
+            // Arrange
+            var expectedCount = 20;
+            var expectedResponseJson = File.ReadAllText("../../../Data/topartists.json");
+            var expectedArtists = JsonSerializer.Deserialize<ArtistCollection>(expectedResponseJson);
+
+            var mock = new Mock<ISpotifyService>();
+
+            mock.Setup(x => x.SendRequest<ArtistCollection>(It.IsAny<string>()).Result).Returns(expectedArtists!);
+            var userService = new UserService(mock.Object);
+
+            // Act
+            var actual = await userService.GetTopItems<ArtistCollection>("tracks", "medium_term");
+
+            // Assert
+            Assert.NotNull(actual);
+            Assert.Equal(expectedArtists!.Items![0].Id, actual.Items![0].Id);
+            Assert.Equal(expectedCount, actual.Items.Count);
+        }
     }
 }
