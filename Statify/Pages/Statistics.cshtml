@@ -3,7 +3,8 @@
 @{
 }
 
-@foreach (var item in Model.AllGenres!.Genres)
+@foreach (var genre in Model.Genres)
 {
-    <h1>@item</h1>
+    <h1>@genre.Key | @genre.Value</h1>
 }
+

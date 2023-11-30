@@ -25,6 +25,6 @@ namespace Statify.Interfaces
         /// <param name="term"></param>
         /// <param name="count"></param>
         /// <returns>top {count} artists or tracks for the specified term.</returns>
-        public Task<T> GetTopItems<T>(string itemType, string term, int count = 20);
+        public Task<T> GetTopItems<T>(string itemType, string term, int count = 20, int offset = 0);
     }
 }

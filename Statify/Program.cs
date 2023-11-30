@@ -14,6 +14,7 @@ namespace Statify
 			builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
 			builder.Services.AddScoped<IUserService, UserService>();
 			builder.Services.AddScoped<ISpotifyService, SpotifyService>();
+			builder.Services.AddScoped<IStatisticsService, StatisticsService>();
 
             builder.Services.AddHttpClient();
             builder.Services.AddHttpContextAccessor();

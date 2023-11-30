@@ -8,22 +8,18 @@ namespace Statify.Pages
 {
     public class StatisticsModel : PageModel
     {
-        private readonly IUserService _userService;
+        private readonly IStatisticsService _statisticsService;
+        public Dictionary<string, int>? Genres { get; set; }        
 
-        public TrackCollection? TrackCollection { get; set; }
-        public ArtistCollection? ArtistCollection { get; set; }
-        public AllGenres? AllGenres = new();
-
-        public StatisticsModel(IUserService userService)
+        public StatisticsModel(IStatisticsService statisticsService)
         {
-            _userService = userService;
+            _statisticsService = statisticsService;
         }
 
-        public async void OnGetAsync()
+        public async Task OnGetAsync()
         {
-            TrackCollection = await _userService.GetTopItems<TrackCollection>("tracks", "long_term", 50);
-            ArtistCollection = await _userService.GetTopItems<ArtistCollection>("artists", "long_term", 50);
-            
+
+            Genres = await _statisticsService.ToBeDecided();
         }
     }
 }
