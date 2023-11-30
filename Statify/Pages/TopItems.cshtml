@@ -8,7 +8,7 @@
     <div class="row text-center bg-color">
         <div class="col m-4">
             <div class="">
-                <form method="get">
+                <form method="get">     @* EDIT DEFAULT BTN *@
                     <!-- Dropdown for item type -->
                     <label for="itemType"></label>
                     <select id="itemType" name="itemType">
@@ -37,7 +37,7 @@
     {
         foreach (var item in Model.TrackCollection.Items)
         {
-            <h2>@item.Name</h2>
+            <a href="@item.ExternalUrls!.Spotify"><h2>@item.Name</h2></a>
             <br />
         }
     }
@@ -45,7 +45,7 @@
     {
         foreach (var item in Model.ArtistCollection.Items)
         {
-            <h2>@item.Name</h2>
+            <a href="@item.ExternalUrls!.Spotify"><h2>@item.Name</h2></a>
             <br />
         }
     }
