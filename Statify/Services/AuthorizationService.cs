@@ -20,7 +20,7 @@ namespace Statify.Services
         }
 
         private const string RedirectUri = "https://localhost:7274";
-        private const string Scope = "user-read-private user-read-email";
+        private const string Scope = "user-read-private user-read-email user-top-read";
 
         public void GenerateCodeChallenge()
         {

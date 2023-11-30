@@ -42,7 +42,6 @@ namespace Statify.Models
         [JsonPropertyName("uri")]
         public string? Uri { get; set; }
     }
-
     public class ExplicitContent
     {
         [JsonPropertyName("filter_enabled")]
@@ -50,32 +49,5 @@ namespace Statify.Models
 
         [JsonPropertyName("filter_locked")]
         public bool FilterLocked { get; set; }
-    }
-
-    public class ExternalUrls
-    {
-        [JsonPropertyName("spotify")]
-        public string? Spotify { get; set; }
-    }
-
-    public class Followers
-    {
-        [JsonPropertyName("href")]
-        public string? Href { get; set; }
-
-        [JsonPropertyName("total")]
-        public int Total { get; set; }
-    }
-
-    public class Image
-    {
-        [JsonPropertyName("url")]
-        public string? Url { get; set; }
-
-        [JsonPropertyName("height")]
-        public int Height { get; set; }
-
-        [JsonPropertyName("width")]
-        public int Width { get; set; }
     }
 }
