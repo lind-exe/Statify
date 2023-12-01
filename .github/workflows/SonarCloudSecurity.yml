@@ -51,7 +51,7 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"lind-exe_Statify" /o:"lind-exe" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" 
-          /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml"
+          /d:sonar.cs.vscoveragexml.reportsPaths="coverage.xml"
   
           dotnet build --no-incremental
           dotnet test # Run your tests
