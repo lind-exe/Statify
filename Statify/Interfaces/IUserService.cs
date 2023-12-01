@@ -26,5 +26,13 @@ namespace Statify.Interfaces
         /// <param name="count"></param>
         /// <returns>top {count} artists or tracks for the specified term.</returns>
         public Task<T> GetTopItems<T>(string itemType, string term, int count = 20, int offset = 0);
+        /// <summary>
+        /// Retrieves track or tracks from spotify based on endpoint
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="endpoint"></param>
+        /// <returns>Singular Track object or TrackCollection</returns>
+        public Task<T> GetTracks<T>(string endpoint);
+
     }
 }

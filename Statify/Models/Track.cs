@@ -1,39 +1,14 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Statify.Models
+﻿namespace Statify.Models
 {
-    public class TrackCollection
-    {
-        [JsonPropertyName("items")]
-        public List<Item>? Items { get; set; }
+    using System.Text.Json.Serialization;
 
-        [JsonPropertyName("total")]
-        public int Total { get; set; }
-
-        [JsonPropertyName("limit")]
-        public int Limit { get; set; }
-
-        [JsonPropertyName("offset")]
-        public int Offset { get; set; }
-
-        [JsonPropertyName("href")]
-        public string? Href { get; set; }
-
-        [JsonPropertyName("next")]
-        public string? Next { get; set; }
-
-        [JsonPropertyName("previous")]
-        public object? Previous { get; set; }
-    }
-
-    public class Item
+    public class Track
     {
         [JsonPropertyName("album")]
         public Album? Album { get; set; }
 
         [JsonPropertyName("artists")]
-        public List<Artist>? Artists { get; set; }
-
+        public Artist[]? Artists { get; set; }
 
         [JsonPropertyName("available_markets")]
         public string[]? AvailableMarkets { get; set; }
@@ -59,8 +34,11 @@ namespace Statify.Models
         [JsonPropertyName("id")]
         public string? Id { get; set; }
 
-        [JsonPropertyName("is_local")]
-        public bool IsLocal { get; set; }
+        [JsonPropertyName("is_playable")]
+        public bool IsPlayable { get; set; }
+
+        [JsonPropertyName("restrictions")]
+        public Restrictions? Restrictions { get; set; }
 
         [JsonPropertyName("name")]
         public string? Name { get; set; }
@@ -79,5 +57,8 @@ namespace Statify.Models
 
         [JsonPropertyName("uri")]
         public string? Uri { get; set; }
+
+        [JsonPropertyName("is_local")]
+        public bool IsLocal { get; set; }
     }
 }

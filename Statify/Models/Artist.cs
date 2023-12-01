@@ -20,7 +20,7 @@ namespace Statify.Models
         public string? Id { get; set; }
 
         [JsonPropertyName("images")]
-        public List<Image>? Images { get; set; }
+        public Image[]? Images { get; set; }
 
         [JsonPropertyName("name")]
         public string? Name { get; set; }

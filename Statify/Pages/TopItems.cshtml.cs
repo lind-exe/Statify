@@ -24,9 +24,7 @@ namespace Statify.Pages
             {
                 if (itemType == "tracks")
                 {
-
                     TrackCollection = await _userService.GetTopItems<TrackCollection>(itemType, term);
-                    
                 }
                 else if (itemType == "artists")
                 {
