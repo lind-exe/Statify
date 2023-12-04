@@ -29,7 +29,7 @@ jobs:
         run: dotnet tool install --global coverlet.console
 
       - name: Run Tests with Coverlet
-        run: dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings
+        run: dotnet test --collect:"XPlat Code Coverage" --settings $(Build.SourcesDirectory)\coverlet.runsettings
 
       - name: Generate Cobertura Report with ReportGenerator
         run: ReportGenerator -reports:$(Build.SourcesDirectory)/coverage.cobertura.xml -targetdir:coveragereport -reporttypes:Cobertura
