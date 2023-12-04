@@ -56,18 +56,23 @@ jobs:
           dotnet build --no-incremental
           dotnet test --collect "Code Coverage"
     
-          # Attempt to find the coverage.xml file
-          $coverageFile = Get-ChildItem -Path $env:SYSTEM_DEFAULTWORKINGDIRECTORY -Recurse -Filter "coverage.xml" | Select-Object -ExpandProperty FullName
+          # List all XML files in the working directory and subdirectories
+          $xmlFiles = Get-ChildItem -Path $env:SYSTEM_DEFAULTWORKINGDIRECTORY -Recurse -Filter "*.xml" | Select-Object -Property FullName
 
-          # Check if coverage.xml is found
+          # Display the list of XML files found
+          Write-Host "List of XML files:"
+          $xmlFiles
+
+          # Check if coverage.xml is found among the XML files
+          $coverageFile = $xmlFiles | Where-Object { $_ -like "*coverage.xml" }
+
           if ($coverageFile) {
           # Display content of coverage.xml for debugging
           Get-Content -Path $coverageFile
 
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
           } else {
-          Write-Host "coverage.xml not found. Searching in $(Resolve-Path $env:SYSTEM_DEFAULTWORKINGDIRECTORY -Relative)"
-          Get-ChildItem -Path $env:SYSTEM_DEFAULTWORKINGDIRECTORY -Recurse -Include "*.xml" | Select-Object -Property FullName
+          Write-Host "coverage.xml not found."
           exit 1
           }
-
+  
