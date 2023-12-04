@@ -49,12 +49,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          COVERAGE_FILE_PATH: './Statify/Statify.Tests/TestResults/0d1b66dc-aa24-49b2-ad68-9c41f5b3ccd0/4db795cf-5bcb-4a85-b9c8-f733daa58cdc.coverage'
         shell: powershell
         run: |
           $coverageFilePath = $env:COVERAGE_FILE_PATH
           
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"lind-exe_Statify" /o:"lind-exe" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.dotcover.reportsPaths="$coverageFilePath"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"lind-exe_Statify" /o:"lind-exe" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.dotcover.reportsPaths="**/*.coverage"
+
           dotnet build --no-incremental
           dotnet test --collect "Code Coverage"
     
