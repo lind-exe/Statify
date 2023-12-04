@@ -5,7 +5,7 @@ namespace Statify.Models
     public class ArtistCollection
     {
         [JsonPropertyName("items")]
-        public List<Artist>? Items { get; set; }
+        public List<Artist>? Artists { get; set; }
 
         [JsonPropertyName("total")]
         public int Total { get; set; }

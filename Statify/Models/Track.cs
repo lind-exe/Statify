@@ -8,7 +8,7 @@
         public Album? Album { get; set; }
 
         [JsonPropertyName("artists")]
-        public Artist[]? Artists { get; set; }
+        public List<Artist>? Artists { get; set; }
 
         [JsonPropertyName("available_markets")]
         public string[]? AvailableMarkets { get; set; }

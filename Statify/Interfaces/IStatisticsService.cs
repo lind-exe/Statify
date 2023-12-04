@@ -6,10 +6,9 @@ namespace Statify.Interfaces
     {
         public Task<Dictionary<string, int>> GetCalculatedGenreData();
 
-        public Task<TrackCollection> GetLikedSongs(int limit, int offset);
+        public Task<TrackData.LikedTracks> GetLikedSongs(int limit, int offset);
 
         public Task<Track> GetTrack(string trackId);
 
-        public Task<TrackCollection> GetSeveralTracks(string trackIds);
     }
 }
