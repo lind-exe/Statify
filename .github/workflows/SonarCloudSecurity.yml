@@ -20,19 +20,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: List Directory Contents
-        run: |
-          # Print the contents of the working directory and subdirectories
-          ls -R
-          # Output directory paths to understand the structure
-          pwd
-          
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v3
-        with:
-          path: ~\sonar\cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
@@ -62,17 +49,24 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          COVERAGE_FILE_PATH: './Statify/Statify.Tests/TestResults/0d1b66dc-aa24-49b2-ad68-9c41f5b3ccd0/4db795cf-5bcb-4a85-b9c8-f733daa58cdc.coverage'
         shell: powershell
         run: |
-          # Assuming your JaCoCo XML reports are generated in a folder named "jacoco"
-          # Adjust the path accordingly to match your project's setup
-          $jacocoReportPath = "path/to/your/jacoco-report.xml"
-
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"lind-exe_Statify" /o:"lind-exe" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.coverage.jacoco.xmlReportPaths="$jacocoReportPath"
-
+          $coverageFilePath = $env:COVERAGE_FILE_PATH
+          
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"lind-exe_Statify" /o:"lind-exe" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.dotcover.reportsPaths="$coverageFilePath"
           dotnet build --no-incremental
           dotnet test --collect "Code Coverage"
     
-          # Other commands and steps as needed in your workflow
+          # Attempt to find the coverage.cobertura.xml file
+          $coverageFile = Get-ChildItem -Path $env:SYSTEM_DEFAULTWORKINGDIRECTORY -Recurse -Filter "coverage.cobertura.xml" | Select-Object -ExpandProperty FullName
+
+          if ($coverageFile) {
+          # Display content of coverage.cobertura.xml for debugging
+          Get-Content -Path $coverageFile
 
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          } else {
+          Write-Host "coverage.cobertura.xml not found."
+          exit 1
+          }
