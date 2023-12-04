@@ -18,7 +18,7 @@ jobs:
           java-version: 17
           distribution: 'zulu'
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install .NET SDK
         uses: actions/setup-dotnet@v1
@@ -36,7 +36,8 @@ jobs:
 
       - name: Run SonarScanner
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"my-project" /o:"lind-exe" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="coverage.cobertura.xml"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"my-project" /o:"lind-exe" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.coverageReportPaths="coveragereport/Cobertura.xml"
           dotnet build
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
 
