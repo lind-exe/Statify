@@ -34,5 +34,6 @@ namespace Statify.Interfaces
         /// <returns>Singular Track object or TrackCollection</returns>
         public Task<T> GetTracks<T>(string endpoint);
         Task<ArtistData.ArtistArtists> GetArtists(string ids);
+        Task <AudioFeatureCollection>GetAudioFeatures(string ids);
     }
 }

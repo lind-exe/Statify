@@ -36,5 +36,9 @@ namespace Statify.Services
         {
             return await _spotifyService.SendRequest<ArtistData.ArtistArtists>($"artists?ids={ids}");
         }
+        public async Task<AudioFeatureCollection> GetAudioFeatures(string ids)
+        {
+            return await _spotifyService.SendRequest<AudioFeatureCollection>($"audio-features?ids={ids}");
+        }
     }
 }
