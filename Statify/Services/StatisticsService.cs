@@ -1,5 +1,6 @@
 ﻿using Statify.Interfaces;
 using Statify.Models;
+using System.Linq;
 
 namespace Statify.Services
 {
@@ -21,42 +22,41 @@ namespace Statify.Services
         }
         private async Task GetData()
         {
-            ArtistCollection = await _userService.GetTopItems<ArtistCollection>("artists", "long_term", 50);
-
             LikedSongs = await GetLikedSongs(50, 0);
 
             if (LikedSongs is not null && LikedSongs.Tracks is not null && LikedSongs.Tracks.Count >= 50)
             {
                 for (int i = 50; i < LikedSongs.Total; i += 50)
                 {
-                    var secondBatch = await GetLikedSongs(50, i);
-                    LikedSongs.Tracks.AddRange(secondBatch.Tracks!);
+                    var nextBatch = await GetLikedSongs(50, i);
+                    LikedSongs.Tracks.AddRange(nextBatch.Tracks!);
                 }
             }
 
+            ArtistCollection = await _userService.GetTopItems<ArtistCollection>("artists", "long_term", 50);
+            
             if (ArtistCollection is not null && ArtistCollection.Artists is not null && ArtistCollection.Artists.Count >= 50)
             {
                 var secondBatch = await _userService.GetTopItems<ArtistCollection>("artists", "long_term", 50, 49);
                 ArtistCollection.Artists.AddRange(secondBatch.Artists ?? Enumerable.Empty<Artist>());
             }
-
         }
-        public async Task ArrangesGenreFrequencyForLikedSongs()
+        public async Task AddArtistsFromLikedSongs()
         {
             if (LikedSongs is null || LikedSongs.Tracks is null)
             {
                 return;
             }
+            // sorts data for unique artists
+            TopArtists.AddRange(from trackItem in LikedSongs!.Tracks!
+                                from artist in trackItem.Track!.Artists!
+                                select artist);
 
-            foreach (var trackItem in LikedSongs!.Tracks!)
-            {
-                foreach (var artist in trackItem.Track!.Artists!)
-                {
-                    // sorts data for unique artists
-                    TopArtists.Add(artist);
-                }
-            }
+            await BuildsStringToGetSeveralArtists();
+        }
 
+        private async Task BuildsStringToGetSeveralArtists()
+        {
             List<Artist> uniqueArtists = TopArtists.GroupBy(x => x.Id)
                          .Select(group => group.First())
                          .ToList();
@@ -74,51 +74,30 @@ namespace Statify.Services
                 LikedArtists!.Artists!.AddRange(idk.Artists!);
             }
         }
-        public void ArrangesGenreFrequencyForTopList()
+
+        public void ArrangesGenreFrequencyForTopList(List<Artist>? artists, Dictionary<string, int> genreDictionary)
         {
-            if (ArtistCollection is null || ArtistCollection.Artists is null)
+            if (artists is null)
             {
                 return;
             }
-            foreach (var artist in ArtistCollection!.Artists!)
+
+            foreach (var artist in artists)
             {
                 if (artist.Genres is null)
                 {
                     continue;
                 }
 
-                foreach (var genre in artist.Genres!)
+                foreach (var genre in artist.Genres)
                 {
-                    GenresFromTopArtists.TryGetValue(genre, out var count);
-                    GenresFromTopArtists[genre] = count + 1;
-                }
-            }
-        }
-        public void ArrangesGenreFrequencyForTopList2()
-        {
-            if (LikedArtists is null || LikedArtists.Artists is null)
-            {
-                return;
-            }
-            foreach (var artist in LikedArtists!.Artists!)
-            {
-                if (artist.Genres is null)
-                {
-                    continue;
-                }
-
-                foreach (var genre in artist.Genres!)
-                {
-                    GenresFromLikedSongs.TryGetValue(genre, out var count);
-                    GenresFromLikedSongs[genre] = count + 1;
+                    genreDictionary.TryGetValue(genre, out var count);
+                    genreDictionary[genre] = count + 1;
                 }
             }
         }
         public async Task<Dictionary<string, int>> CompareAndCalculateScore()
         {
-            // GenresFromTopArtists
-            // GenresFromLikedSongs
-
             // Compare each artist from each dictionary and multiply values where key matches. Example: Key: Rock, Value: 8 multiplied by: Key:Rock, Value: 37 == 8 X 37 == finalScore
 
             if (GenresFromTopArtists == null || GenresFromLikedSongs == null)
@@ -145,7 +124,7 @@ namespace Statify.Services
                 genreScores[likedGenre] = GenresFromLikedSongs[likedGenre];
             }
 
-            var sortedGenreScores = genreScores.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+            var sortedGenreScores = genreScores.OrderByDescending(x => x.Value).Take(10).ToDictionary(x => x.Key, x => x.Value);
 
             return sortedGenreScores;
         }
@@ -154,9 +133,13 @@ namespace Statify.Services
         {
             LikedArtists!.Artists = new();
             await GetData();
-            ArrangesGenreFrequencyForTopList();
-            await ArrangesGenreFrequencyForLikedSongs();
-            ArrangesGenreFrequencyForTopList2();
+
+            // For GenresFromTopArtists
+            ArrangesGenreFrequencyForTopList(ArtistCollection?.Artists, GenresFromTopArtists);
+
+            await AddArtistsFromLikedSongs();
+            // For GenresFromLikedSongs
+            ArrangesGenreFrequencyForTopList(LikedArtists?.Artists, GenresFromLikedSongs);
             var genres = await CompareAndCalculateScore();
 
             return genres;
