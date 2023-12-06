@@ -35,7 +35,6 @@ namespace Statify.Services
         public async Task<ArtistData.ArtistArtists> GetArtists(string ids)
         {
             return await _spotifyService.SendRequest<ArtistData.ArtistArtists>($"artists?ids={ids}");
-
         }
     }
 }
