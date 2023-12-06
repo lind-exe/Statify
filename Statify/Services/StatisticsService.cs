@@ -19,6 +19,22 @@ namespace Statify.Services
         public StatisticsService(IUserService userService)
         {
             _userService = userService;
+            LikedArtists!.Artists = new();
+        }
+        public async Task<Dictionary<string, int>> GetCalculatedGenreData()
+        {
+            await GetData();
+
+            // For GenresFromTopArtists
+            ArrangesGenreFrequencyForTopList(ArtistCollection?.Artists, GenresFromTopArtists);
+
+            await AddArtistsFromLikedSongs();
+            await BuildsStringToGetSeveralArtists();
+            // For GenresFromLikedSongs
+            ArrangesGenreFrequencyForTopList(LikedArtists?.Artists, GenresFromLikedSongs);
+            var genres = await CompareAndCalculateScore();
+
+            return genres;
         }
         private async Task GetData()
         {
@@ -41,6 +57,7 @@ namespace Statify.Services
                 ArtistCollection.Artists.AddRange(secondBatch.Artists ?? Enumerable.Empty<Artist>());
             }
         }
+
         public async Task AddArtistsFromLikedSongs()
         {
             if (LikedSongs is null || LikedSongs.Tracks is null)
@@ -52,10 +69,9 @@ namespace Statify.Services
                                 from artist in trackItem.Track!.Artists!
                                 select artist);
 
-            await BuildsStringToGetSeveralArtists();
         }
 
-        private async Task BuildsStringToGetSeveralArtists()
+        public async Task BuildsStringToGetSeveralArtists()
         {
             List<Artist> uniqueArtists = TopArtists.GroupBy(x => x.Id)
                          .Select(group => group.First())
@@ -129,21 +145,6 @@ namespace Statify.Services
             return sortedGenreScores;
         }
 
-        public async Task<Dictionary<string, int>> GetCalculatedGenreData()
-        {
-            LikedArtists!.Artists = new();
-            await GetData();
-
-            // For GenresFromTopArtists
-            ArrangesGenreFrequencyForTopList(ArtistCollection?.Artists, GenresFromTopArtists);
-
-            await AddArtistsFromLikedSongs();
-            // For GenresFromLikedSongs
-            ArrangesGenreFrequencyForTopList(LikedArtists?.Artists, GenresFromLikedSongs);
-            var genres = await CompareAndCalculateScore();
-
-            return genres;
-        }
         public async Task<TrackData.LikedTracks> GetLikedSongs(int limit, int offset)
         {
             return await _userService.GetTracks<TrackData.LikedTracks>($"me/tracks?limit={limit}&offset={offset}");
