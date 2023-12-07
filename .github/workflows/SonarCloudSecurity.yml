@@ -52,9 +52,9 @@ jobs:
         shell: powershell
         run: |
         
-          .\.sonar\scanner\dotnet sonarscanner begin /k:"lind-exe_Statify" /o:"lind-exe" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"lind-exe_Statify" /o:"lind-exe" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
           dotnet build --no-incremental
           dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml" 
           dotnet test --collect "Code Coverage"
 
-          .\.sonar\scanner\dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
