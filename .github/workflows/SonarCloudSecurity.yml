@@ -50,13 +50,12 @@ jobs:
         run: |
           $coveragePath = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Recurse -Filter "*.coverage" | Select-Object -ExpandProperty FullName
           echo "Coverage report path: $coveragePath"
-          echo "::set-env name=COVERAGE_FILE_PATH::$coveragePath"
+          echo "COVERAGE_FILE_PATH=$coveragePath" >> $GITHUB_ENV
 
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          COVERAGE_FILE_PATH: ${{ env.COVERAGE_FILE_PATH }}
         shell: powershell
         run: |
           $coverageFilePath = $env:COVERAGE_FILE_PATH
