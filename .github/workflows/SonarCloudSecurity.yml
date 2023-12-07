@@ -58,6 +58,8 @@ jobs:
             echo "Coverage report path found: $coveragePath"
             # Set the COVERAGE_FILE_PATH directly as an environment variable
             echo "COVERAGE_FILE_PATH=$coveragePath" >> $GITHUB_ENV
+            # Print the environment variables to ensure COVERAGE_FILE_PATH is set
+            printenv
           } else {
             echo "No coverage report found."
             exit 1
