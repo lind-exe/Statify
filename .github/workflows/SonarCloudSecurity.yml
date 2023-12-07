@@ -48,15 +48,21 @@ jobs:
       - name: Find coverage report
         id: find-coverage
         run: |
-          $coveragePath = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Recurse -Filter "*.coverage" | Select-Object -ExpandProperty FullName
-          echo "Coverage report path: $coveragePath"
-          echo "COVERAGE_FILE_PATH=$coveragePath" >> $GITHUB_ENV
+          $coveragePath = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Recurse -Filter "*.coverage" | Select-Object -ExpandProperty FullName -First 1
+          if (-not [string]::IsNullOrWhiteSpace($coveragePath)) {
+            echo "Coverage report path found: $coveragePath"
+            echo "COVERAGE_FILE_PATH=$coveragePath" >> $GITHUB_ENV
+          } else {
+            echo "No coverage report found."
+            exit 1
+          }
 
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        shell: powershell
+          COVERAGE_FILE_PATH: ${{ env.COVERAGE_FILE_PATH }}
+        shell: pwsh
         run: |
           $coverageFilePath = $env:COVERAGE_FILE_PATH
 
