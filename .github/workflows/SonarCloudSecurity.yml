@@ -70,8 +70,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          COVERAGE_FILE_PATH: ${{ env.COVERAGE_FILE_PATH }}
         run: |
+          # Access the COVERAGE_FILE_PATH from the environment
           $coverageFilePath = $env:COVERAGE_FILE_PATH
 
           if (-not [string]::IsNullOrWhiteSpace($coverageFilePath)) {
