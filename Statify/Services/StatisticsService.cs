@@ -41,7 +41,7 @@ namespace Statify.Services
         }
         public TimeSpan GetTotalDurationOfTopSongs()
         {
-            return CalculateTotalDurationOfTopSongs();
+            return CalculateTotalDurationOfTopSongs(TrackList!);
         }
         public async Task<AudioFeature> GetCalculatedAudioFeatures()
         {
@@ -55,8 +55,6 @@ namespace Statify.Services
             await GetTop50Tracks();
             await GetAudioFeatures();
             var audioFeatures = await CalculateTypeOfListener();
-            //var userSoundProfile = GetTop3Properties(audioFeatures);
-            //var title = SetUserSoundProfileTitle(userSoundProfile);
 
             if (audioFeatures.Acousticness > 125)
             {
@@ -75,23 +73,21 @@ namespace Statify.Services
                 return "red bull enjoyer";
             }
 
-
-
             return "versatile music taste enjoyer";
         }
-        private async Task GetTop50Tracks()
+        public async Task GetTop50Tracks()
         {
             TrackList = await _userService.GetTopItems<TrackData.TrackList>("tracks", "long_term", 50);
         }
 
 
-        private async Task<AudioFeatureCollection> GetAudioFeatures()
+        public async Task<AudioFeatureCollection> GetAudioFeatures()
         {
             string idsString = string.Join(",", TrackList!.Tracks!.Select(track => track.Id));
 
             return await _userService.GetAudioFeatures(idsString);
         }
-        private async Task<AudioFeature> CalculateTypeOfListener()
+        public async Task<AudioFeature> CalculateTypeOfListener()
         {
             AudioFeature feature = new();
 
@@ -109,11 +105,11 @@ namespace Statify.Services
             }
             return feature;
         }
-        public TimeSpan CalculateTotalDurationOfTopSongs()
+        public TimeSpan CalculateTotalDurationOfTopSongs(TrackData.TrackList tracklist)
         {
             float durationInSeconds = 0;
 
-            foreach (var track in TrackList.Tracks)
+            foreach (var track in tracklist.Tracks!)
             {
                 durationInSeconds += (track.DurationMs / 1000);
             }

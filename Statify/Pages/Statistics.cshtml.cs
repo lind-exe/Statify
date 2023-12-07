@@ -25,7 +25,7 @@ namespace Statify.Pages
             Genres = await _statisticsService.GetCalculatedGenreData();
             AudioFeatures = await _statisticsService.GetCalculatedAudioFeatures();
             UserTitle = await _statisticsService.GetUserSoundProfileTitle();
-            TotalDuration = _statisticsService.CalculateTotalDurationOfTopSongs();
+            TotalDuration = _statisticsService.GetTotalDurationOfTopSongs();
             // get top audio feature - x amount of songs
 
         }
