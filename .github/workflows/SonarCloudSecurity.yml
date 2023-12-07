@@ -56,7 +56,7 @@ jobs:
           $coveragePath = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Recurse -Filter "*.coverage" | Select-Object -ExpandProperty FullName -First 1
           if (-not [string]::IsNullOrWhiteSpace($coveragePath)) {
             echo "Coverage report path found: $coveragePath"
-            echo "COVERAGE_FILE_PATH=$coveragePath" >> $GITHUB_ENV
+            echo "::set-output name=COVERAGE_FILE_PATH::$coveragePath"
           } else {
             echo "No coverage report found."
             exit 1
@@ -67,11 +67,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          COVERAGE_FILE_PATH: ${{ env.COVERAGE_FILE_PATH }}
         run: |
-          $coverageFilePath = $env:COVERAGE_FILE_PATH
+          $coverageFilePath = ${{ steps.find-coverage.outputs.COVERAGE_FILE_PATH }}
 
-          # Check if COVERAGE_FILE_PATH is set and valid
           if (-not [string]::IsNullOrWhiteSpace($coverageFilePath)) {
             .\.sonar\scanner\dotnet-sonarscanner begin /k:"lind-exe_Statify" /o:"lind-exe" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.dotcover.reportsPaths="$coverageFilePath"
           } else {
