@@ -45,38 +45,14 @@ jobs:
       - name: Install dotnet-coverage tool
         run: dotnet tool install --global dotnet-coverage
      
-      - name: Run tests
-        run: |
-          dotnet test --collect "Code Coverage"
-
-      - name: Find coverage report
-        id: find-coverage
-        if: ${{ failure() == false }}
-        run: |
-          $coveragePath = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Recurse -Filter "*.coverage" | Select-Object -ExpandProperty FullName -First 1
-          if (-not [string]::IsNullOrWhiteSpace($coveragePath)) {
-            echo "Coverage report path found: $coveragePath"
-            # Set the COVERAGE_FILE_PATH directly as an environment variable
-            echo "COVERAGE_FILE_PATH=$coveragePath" >> $GITHUB_ENV
-            # Print the environment variables to ensure COVERAGE_FILE_PATH is set
-            printenv
-          } else {
-            echo "No coverage report found."
-            exit 1
-          }
-
       - name: Build and analyze
-        if: ${{ failure() == false }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: powershell
         run: |
-          # Access the COVERAGE_FILE_PATH from the environment
           $coverageFilePath = $env:COVERAGE_FILE_PATH
-
-          if (-not [string]::IsNullOrWhiteSpace($coverageFilePath)) {
-            .\.sonar\scanner\dotnet-sonarscanner begin /k:"lind-exe_Statify" /o:"lind-exe" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.dotcover.reportsPaths="$coverageFilePath"
-          } else {
-            echo "COVERAGE_FILE_PATH is not set or the coverage report path is invalid."
-            exit 1
-          }
+          
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"lind-exe_Statify" /o:"lind-exe" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" 
+          dotnet build --no-incremental
+          dotnet test --collect "Code Coverage"
