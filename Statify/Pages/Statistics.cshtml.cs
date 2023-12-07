@@ -14,6 +14,7 @@ namespace Statify.Pages
         public TrackData.LikedTracks? LikedSongs { get; set; }
         public AudioFeature AudioFeatures { get; set; }
         public string UserTitle { get; set; }
+        public TimeSpan TotalDuration { get; set; }
         public StatisticsModel(IStatisticsService statisticsService)
         {
             _statisticsService = statisticsService;
@@ -24,6 +25,7 @@ namespace Statify.Pages
             Genres = await _statisticsService.GetCalculatedGenreData();
             AudioFeatures = await _statisticsService.GetCalculatedAudioFeatures();
             UserTitle = await _statisticsService.GetUserSoundProfileTitle();
+            TotalDuration = _statisticsService.CalculateTotalDurationOfTopSongs();
             // get top audio feature - x amount of songs
 
         }

@@ -7,6 +7,7 @@ namespace Statify.Interfaces
         public Task<Dictionary<string, int>> GetCalculatedGenreData();
         public Task<AudioFeature> GetCalculatedAudioFeatures();
         public Task<string> GetUserSoundProfileTitle();
+        public TimeSpan CalculateTotalDurationOfTopSongs();
 
     }
 }

@@ -2,21 +2,22 @@
 @model Statify.Pages.StatisticsModel
 @{
 }
-
+<h1>Your top genres</h1>
 @foreach (var genre in Model.Genres)
 {
     <h1>@genre.Key | @genre.Value</h1>
 }
 <hr />
 
-<h1>Acousticness = @Model.AudioFeatures.Acousticness</h1>
-<h1>Danceability = @Model.AudioFeatures.Danceability</h1>
-<h1>Energy = @Model.AudioFeatures.Energy</h1>
-<h1>Instrumentalness = @Model.AudioFeatures.Instrumentalness</h1>
-<h1>Speechiness = @Model.AudioFeatures.Speechiness</h1>
-<h1>Valence = @Model.AudioFeatures.Valence</h1>
+<h2>Acousticness = @Model.AudioFeatures.Acousticness</h2>
+<h2>Danceability = @Model.AudioFeatures.Danceability</h2>
+<h2>Energy = @Model.AudioFeatures.Energy</h2>
+<h2>Speechiness = @Model.AudioFeatures.Speechiness</h2>
+<h2>Valence = @Model.AudioFeatures.Valence</h2>
 
 <hr />
 
-<h1>You are a @Model.UserTitle listener!</h1>
+<h2>You are a @Model.UserTitle!</h2>
+
+<h2>Total duration of your top 50 songs: @Model.TotalDuration.Hours hours @Model.TotalDuration.Minutes minutes and @Model.TotalDuration.Seconds seconds.</h2>
 
