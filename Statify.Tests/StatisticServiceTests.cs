@@ -110,7 +110,7 @@ namespace Statify.Tests
         [Fact]
         public async Task GetUserSoundProfile_ReturnsExpectedSoundProfile()
         {
-            // Arrange - Mocking the JSON responses for AudioFeature and Track
+            // Arrange
             var audioFeatureJson = File.ReadAllText("../../../Data/top50audiofeature.json");
             var expectedAudioFeature = JsonSerializer.Deserialize<AudioFeatureCollection>(audioFeatureJson);
 
@@ -118,25 +118,22 @@ namespace Statify.Tests
             var expectedTrack = JsonSerializer.Deserialize<TrackData.TrackList>(trackJson);
 
             var mockUserService = new Mock<IUserService>();
-            var mockService = new Mock<StatisticsService>(mockUserService.Object); // Pass the mocked IUserService to StatisticsService
+            var mockService = new Mock<StatisticsService>(mockUserService.Object);
 
-            // Rest of the setup remains the same
-            var taskCompletionSource = new TaskCompletionSource<TrackData.TrackList>();
-            taskCompletionSource.SetResult(expectedTrack);
-            mockService.Setup(x => x.GetTop50Tracks()).Returns(taskCompletionSource.Task);
-            mockService.Setup(x => x.GetAudioFeatures()).Returns(Task.FromResult(expectedAudioFeature));
+            mockUserService.Setup(x => x.GetTopItems<TrackData.TrackList>("tracks", "long_term", It.IsAny<int>(), It.IsAny<int>()))
+               .ReturnsAsync(expectedTrack!);
+            mockUserService.Setup(x => x.GetAudioFeatures(It.IsAny<string>()))
+                           .ReturnsAsync(expectedAudioFeature!);
 
-            var userService = mockService.Object; // Get the mocked StatisticsService object
+            var userService = mockService.Object;
 
 
             // Act
             var actualSoundProfile = await userService.GetUserSoundProfileTitle();
 
-            // Assert - Add assertions based on the conditions in the method and the expected behavior
+            // Assert
             Assert.NotNull(actualSoundProfile);
-
-            // Example assertions:
-            Assert.Equal("instrumental enjoyer", actualSoundProfile); // Assuming the condition matches for Acousticness > 125
+            Assert.Equal("versatile music taste enjoyer", actualSoundProfile); 
 
         }
 

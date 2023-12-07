@@ -36,7 +36,7 @@ namespace Statify.Services
             // For GenresFromLikedSongs
             ArrangesGenreFrequencyForTopList(LikedArtists?.Artists, GenresFromLikedSongs);
             var genres = await CompareAndCalculateScore();
-            
+
             return genres;
         }
         public TimeSpan GetTotalDurationOfTopSongs()
@@ -53,7 +53,7 @@ namespace Statify.Services
         public async Task<string> GetUserSoundProfileTitle()
         {
             await GetTop50Tracks();
-            await GetAudioFeatures();
+
             var audioFeatures = await CalculateTypeOfListener();
 
             if (audioFeatures.Acousticness > 125)
@@ -97,11 +97,14 @@ namespace Statify.Services
 
             for (int i = 0; i < audioFeatures.Result.Features!.Length; i++)
             {
-                feature.Acousticness += (float)Math.Round((audioFeatures.Result.Features[i].Acousticness * 10));
-                feature.Danceability += (float)Math.Round((audioFeatures.Result.Features[i].Danceability * 10));
-                feature.Energy +=       (float)Math.Round((audioFeatures.Result.Features[i].Energy * 10));
-                feature.Valence +=      (float)Math.Round((audioFeatures.Result.Features[i].Valence * 10));
-                feature.Speechiness +=  (float)Math.Round((audioFeatures.Result.Features[i].Speechiness * 10));
+                if (audioFeatures.Result.Features[i] is not null)
+                {
+                    feature.Acousticness += (float)Math.Round((audioFeatures.Result.Features[i].Acousticness * 10));
+                    feature.Danceability += (float)Math.Round((audioFeatures.Result.Features[i].Danceability * 10));
+                    feature.Energy += (float)Math.Round((audioFeatures.Result.Features[i].Energy * 10));
+                    feature.Valence += (float)Math.Round((audioFeatures.Result.Features[i].Valence * 10));
+                    feature.Speechiness += (float)Math.Round((audioFeatures.Result.Features[i].Speechiness * 10));
+                }
             }
             return feature;
         }
