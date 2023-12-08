@@ -133,7 +133,7 @@ namespace Statify.Tests
 
             // Assert
             Assert.NotNull(actualSoundProfile);
-            Assert.Equal("versatile music taste enjoyer", actualSoundProfile); 
+            Assert.Equal("red bull enjoyer", actualSoundProfile); 
 
         }
 
