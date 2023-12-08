@@ -1,0 +1,51 @@
+﻿@page
+@model Statify.Pages.StatisticsModel
+@{
+}
+<div class="row bg-color text-center text-color-white shadow">
+    <div class="col py-3">
+        <h1 class="text-center">Your top genres</h1>
+    </div>
+</div>
+
+<div class="row my-4 text-center text-color-white shadow">
+    <div class="col py-3">
+        @foreach (var genre in Model.Genres)
+        {
+            <h3>@genre.Key | @genre.Value</h3>
+        }
+    </div>
+</div>
+
+<div class="row my-4 bg-color text-center text-color-white shadow">
+    <div class="col py-3">
+        <h1 class="text-center">Your song preferences</h1>
+    </div>
+</div>
+<div class="row my-4 text-center text-color-white shadow">
+    <div class="col py-3">
+        <h3>Acousticness = @Model.AudioFeatures.Acousticness</h3>
+        <h3>Danceability = @Model.AudioFeatures.Danceability</h3>
+        <h3>Energy = @Model.AudioFeatures.Energy</h3>
+        <h3>Speechiness = @Model.AudioFeatures.Speechiness</h3>
+        <h3>Valence = @Model.AudioFeatures.Valence</h3>
+    </div>
+</div>
+<div class="row my-4 bg-color text-center text-color-white shadow">
+    <div class="col py-3">
+        <h1>Other stats</h1>
+    </div>
+</div>
+<div class="text-center">
+    <h1 class="text-center">You are a @Model.UserTitle!</h1>
+    <h2>Total duration of your top 50 songs</h2>
+    <h3>@Model.TotalDuration.Hours hours @Model.TotalDuration.Minutes minutes and @Model.TotalDuration.Seconds seconds.</h3>
+</div>
+
+@* stop loading on myprofile*@
+<script>
+    function hideLoadingAnimation() {
+        document.getElementById('loading-container').style.display = 'none';
+    }
+    hideLoadingAnimation();
+</script>

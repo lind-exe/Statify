@@ -33,17 +33,18 @@
 
 <div class="text-center">
 
-    @if (Model.TrackCollection is not null && Model.TrackCollection.Items is not null)
+    @if (Model.TrackCollection is not null && Model.TrackCollection.Tracks is not null)
     {
-        foreach (var item in Model.TrackCollection.Items)
+        foreach (var item in Model.TrackCollection.Tracks)
         {
+
             <a href="@item.ExternalUrls!.Spotify"><h2>@item.Name</h2></a>
             <br />
         }
     }
-    @if (Model.ArtistCollection is not null && Model.ArtistCollection.Items is not null)
+    @if (Model.ArtistCollection is not null && Model.ArtistCollection.Artists is not null)
     {
-        foreach (var item in Model.ArtistCollection.Items)
+        foreach (var item in Model.ArtistCollection.Artists)
         {
             <a href="@item.ExternalUrls!.Spotify"><h2>@item.Name</h2></a>
             <br />

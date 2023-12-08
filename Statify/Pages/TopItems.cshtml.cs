@@ -9,7 +9,8 @@ namespace Statify.Pages
     public class TopItemsModel : PageModel
     {
         private readonly IUserService _userService;
-        public TrackCollection? TrackCollection { get; set; }
+        //public TrackCollection? TrackCollection { get; set; }
+        public TrackData.TrackList? TrackCollection { get; set; }
         public ArtistCollection? ArtistCollection { get; set; }
 
 
@@ -24,9 +25,7 @@ namespace Statify.Pages
             {
                 if (itemType == "tracks")
                 {
-
-                    TrackCollection = await _userService.GetTopItems<TrackCollection>(itemType, term);
-                    
+                    TrackCollection = await _userService.GetTopItems<TrackData.TrackList>(itemType, term);
                 }
                 else if (itemType == "artists")
                 {
