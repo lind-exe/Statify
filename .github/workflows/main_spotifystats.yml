@@ -54,4 +54,4 @@ jobs:
           app-name: 'spotifystats'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_798672605BA04C12AF32FC722CEB55B3 }}
+          publish-profile: ${{ secrets.AZURE_TOKEN }}
