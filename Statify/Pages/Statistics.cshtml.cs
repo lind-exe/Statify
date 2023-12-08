@@ -19,7 +19,6 @@ namespace Statify.Pages
         {
             _statisticsService = statisticsService;
         }
-
         public async Task OnGetAsync()
         {
             Genres = await _statisticsService.GetCalculatedGenreData();

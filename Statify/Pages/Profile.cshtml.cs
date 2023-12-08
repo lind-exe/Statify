@@ -10,7 +10,6 @@ namespace Statify.Pages
         private readonly IUserService _userService;
         [BindProperty]
         public new User? User { get; set; }
-        //public PlayListCollection? Playlists { get; set; }
         public PlaylistResponse? Playlists { get; set; }
 
         public ProfileModel(IUserService userService)
