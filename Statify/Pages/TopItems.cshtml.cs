@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Statify.Interfaces;
 using Statify.Models;
 using Statify.Services;
+using static Statify.Models.ArtistData;
 
 namespace Statify.Pages
 {
@@ -11,14 +12,11 @@ namespace Statify.Pages
         private readonly IUserService _userService;
         //public TrackCollection? TrackCollection { get; set; }
         public TrackData.TrackList? TrackCollection { get; set; }
-        public ArtistCollection? ArtistCollection { get; set; }
-
-
+        public ArtistItems? ArtistCollection { get; set; }
         public TopItemsModel(IUserService userService)
         {
             _userService = userService;
         }
-
         public async Task OnGetAsync(string itemType, string term)
         {
             if (!string.IsNullOrEmpty(itemType) && !string.IsNullOrEmpty(term))
@@ -29,12 +27,8 @@ namespace Statify.Pages
                 }
                 else if (itemType == "artists")
                 {
-                    ArtistCollection = await _userService.GetTopItems<ArtistCollection>(itemType, term);
+                    ArtistCollection = await _userService.GetTopItems<ArtistItems>(itemType, term);
                 }
-            }
-            else
-            {
-                // Handle the case where either itemType or term is not selected
             }
         }
     }

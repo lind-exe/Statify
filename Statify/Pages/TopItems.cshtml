@@ -4,7 +4,6 @@
 }
 <h3 class="text-center py-1">Show top Artist & Tracks</h3>
 <div class="mx-auto page-container pb-4">
-
     <div class="row text-center bg-color">
         <div class="col m-4">
             <div class="">
@@ -30,9 +29,7 @@
         </div>
     </div>
 </div>
-
 <div class="text-center">
-
     @if (Model.TrackCollection is not null && Model.TrackCollection.Tracks is not null)
     {
         foreach (var item in Model.TrackCollection.Tracks)

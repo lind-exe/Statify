@@ -31,9 +31,6 @@ namespace Statify.Models
         }
         public class LikedTracks : BaseResponse
         {
-            //[JsonPropertyName("previous")]
-            //public string? Previous { get; set; }
-
             [JsonPropertyName("items")]
             public List<TrackItem>? Tracks { get; set; }
         }

@@ -18,22 +18,22 @@ namespace Statify.Tests
         public void CanArrangeGenreFrequencyForTopList()
         {
             // Arrange
-            var statisticsService = new StatisticsService(null);
+            var statisticsService = new StatisticsService(null!);
 
             var artists = new List<Artist>
-        {
-            new Artist { Id = "1", Genres = new List<string> { "Rock", "Pop" } },
-            new Artist { Id = "2", Genres = new List<string> { "Pop", "Jazz" } },
-            new Artist { Id = "3", Genres = new List<string> { "Rock", "Country" } }
-        };
+            {
+                new Artist { Id = "1", Genres = new List<string> { "Rock", "Pop" } },
+                new Artist { Id = "2", Genres = new List<string> { "Pop", "Jazz" } },
+                new Artist { Id = "3", Genres = new List<string> { "Rock", "Country" } }
+            };
 
             var genreDictionary = new Dictionary<string, int>
-        {
-            { "Rock", 0 },
-            { "Pop", 0 },
-            { "Jazz", 0 },
-            { "Country", 0 }
-        };
+            {
+                { "Rock", 0 },
+                { "Pop", 0 },
+                { "Jazz", 0 },
+                { "Country", 0 }
+            };
 
             // Act
             statisticsService.ArrangesGenreFrequencyForTopList(artists, genreDictionary);
@@ -49,20 +49,20 @@ namespace Statify.Tests
         public void CanCompareAndCalculateScoreWithCorrectResult()
         {
             // Arrange
-            var statisticsService = new StatisticsService(null); 
+            var statisticsService = new StatisticsService(null!); 
 
             var genresFromTopArtists = new Dictionary<string, int>
-        {
-            { "Rock", 8 },
-            { "Pop", 5 },
-            { "Jazz", 10 },
-        };
+            {
+                { "Rock", 8 },
+                { "Pop", 5 },
+                { "Jazz", 10 },
+            };
 
             var genresFromLikedSongs = new Dictionary<string, int>
-        {
-            { "Rock", 37 },
-            { "Pop", 20 },
-        };
+            {
+                { "Rock", 37 },
+                { "Pop", 20 },
+            };
 
             statisticsService.GenresFromTopArtists = genresFromTopArtists;
             statisticsService.GenresFromLikedSongs = genresFromLikedSongs;
@@ -72,10 +72,10 @@ namespace Statify.Tests
 
             // Assert
             Assert.NotNull(actual);
-            Assert.Equal(3, actual.Result.Keys.Count); 
-            Assert.Equal(296, actual.Result["Rock"]); // Expected result: 8 * 37 = 296
-            Assert.Equal(100, actual.Result["Pop"]);  // Expected result: 5 * 20 = 100
-            Assert.Equal(10, actual.Result["Jazz"]);  // No matching genre in GenresFromLikedSongs, so should remain the same (10)
+            Assert.Equal(3, actual.Keys.Count); 
+            Assert.Equal(296, actual["Rock"]); // Expected result: 8 * 37 = 296
+            Assert.Equal(100, actual["Pop"]);  // Expected result: 5 * 20 = 100
+            Assert.Equal(10, actual["Jazz"]);  // No matching genre in GenresFromLikedSongs, so should remain the same (10)
         }
 
         [Fact]
@@ -95,7 +95,7 @@ namespace Statify.Tests
             };
             TimeSpan expectedTime = TimeSpan.Parse("01:13:30");
 
-            var trackData = new StatisticsService(null);
+            var trackData = new StatisticsService(null!);
 
             // Act
             var actual = trackData.CalculateTotalDurationOfTopSongs(tracklist);
@@ -108,7 +108,7 @@ namespace Statify.Tests
 
         }
         [Fact]
-        public async Task GetUserSoundProfile_ReturnsExpectedSoundProfile()
+        public async Task GetUserSoundProfileReturnsExpectedSoundProfile()
         {
             // Arrange
             var audioFeatureJson = File.ReadAllText("../../../Data/top50audiofeature.json");
@@ -134,8 +134,6 @@ namespace Statify.Tests
             // Assert
             Assert.NotNull(actualSoundProfile);
             Assert.Equal("red bull enjoyer", actualSoundProfile); 
-
         }
-
     }
 }

@@ -38,8 +38,80 @@
             </div>
         </nav>
     </header>
+@*     IMPLEMENTS LOADING SYMBOL WHEN NAVIGATING TO /STATISTICS PAGE FROM ANYWHERE *@   
     <div class="container page-container">
         <main role="main" class="pb-3">
+            <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/infinity.js"></script>
+
+
+            <div id="blur-container"></div>
+
+            <div id="loading-container">
+                <div id="loading-content" style="color: #1259D3;">
+                    <h2 id="loading-text">Fetching data from Spotify</h2>
+                    <l-infinity size="150"
+                                stroke="16"
+                                stroke-length="0.13"
+                                bg-opacity="0.1"
+                                speed="1.3"
+                                color="#1259D3"></l-infinity>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    var blurContainer = document.getElementById("blur-container");
+                    var loadingContainer = document.getElementById("loading-container");
+                    var loadingContent = document.getElementById("loading-text");
+                    var startTime = Date.now();
+
+                    function showLoadingAnimation() {
+                        blurContainer.style.display = "block";
+                        loadingContainer.style.display = "block";
+                        startTime = Date.now();
+                        updateLoadingText();
+                    }
+
+                    // Function to hide the loading animation
+                    function hideLoadingAnimation() {
+                        blurContainer.style.display = "none";
+                        loadingContainer.style.display = "none";
+                    }
+
+                    // Function to dynamically update text based on elapsed time -- Still bugged
+                    function updateLoadingText() {
+                        var elapsedTime = (Date.now() - startTime) / 1000;
+
+                        var phase1Text = 'Fetching data from Spotify';
+                        var phase2Text = 'Still fetching data from Spotify...';
+
+                        var currentPhase = elapsedTime < 10 ? 1 : 2;
+
+                        var originalText = currentPhase === 1 ? phase1Text : phase2Text;
+
+                        var charactersToShow = Math.min(Math.floor(elapsedTime * 20), originalText.length);
+
+                        var textToDisplay = originalText.substr(0, charactersToShow);
+
+                        loadingContent.innerText = textToDisplay;
+
+                        if (charactersToShow < originalText.length) {
+                            requestAnimationFrame(updateLoadingText);
+                        } else if (currentPhase === 1 && elapsedTime >= 10) {
+                            startTime = Date.now();
+                            requestAnimationFrame(updateLoadingText);
+                        }
+                    }
+
+                    var link = document.getElementById("statistics-link");
+                    link.addEventListener("click", function () {
+                        showLoadingAnimation();
+                        // Reset the start time when the link is clicked
+                        startTime = Date.now();
+                        requestAnimationFrame(updateLoadingText);
+                    });
+                });
+            </script>
             @RenderBody()
         </main>
     </div>

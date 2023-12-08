@@ -15,8 +15,10 @@ namespace Statify.Tests
         public void CheckIfGenerateCodeChallengeIsNotEmpty()
         {
             // Arrange
-            var httpContext = new DefaultHttpContext();
-            httpContext.Session = new MockSession();
+            var httpContext = new DefaultHttpContext
+            {
+                Session = new MockSession()
+            };
 
             var httpContextAccessor = new Mock<IHttpContextAccessor>();
             httpContextAccessor.Setup(x => x.HttpContext).Returns(httpContext);
@@ -36,8 +38,10 @@ namespace Statify.Tests
         public void CanGenerateCodeChallengeWithCorrectLength()
         {
             // Arrange
-            var httpContext = new DefaultHttpContext();
-            httpContext.Session = new MockSession();
+            var httpContext = new DefaultHttpContext
+            {
+                Session = new MockSession()
+            };
 
             var httpContextAccessor = new Mock<IHttpContextAccessor>();
             httpContextAccessor.Setup(x => x.HttpContext).Returns(httpContext);
@@ -56,8 +60,10 @@ namespace Statify.Tests
         public void GenerateCodeChallengeHasValidCharacters()
         {
             // Arrange
-            var httpContext = new DefaultHttpContext();
-            httpContext.Session = new MockSession();
+            var httpContext = new DefaultHttpContext
+            {
+                Session = new MockSession()
+            };
 
             var httpContextAccessor = new Mock<IHttpContextAccessor>();
             httpContextAccessor.Setup(x => x.HttpContext).Returns(httpContext);

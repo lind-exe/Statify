@@ -1,6 +1,14 @@
 ﻿@page
 @model Statify.Pages.StatisticsModel
 @{
+    List<(string, string)> features = new List<(string, string)>
+    {
+        ("Acousticness", Model.AudioFeatures!.Acousticness.ToString()),
+        ("Danceability", Model.AudioFeatures.Danceability.ToString()),
+        ("Energy", Model.AudioFeatures.Energy.ToString()),
+        ("Speechiness", Model.AudioFeatures.Speechiness.ToString()),
+        ("Valence", Model.AudioFeatures.Valence.ToString())
+    };
 }
 <div class="row bg-color text-center text-color-white shadow">
     <div class="col py-3">
@@ -10,25 +18,56 @@
 
 <div class="row my-4 text-center text-color-white shadow">
     <div class="col py-3">
-        @foreach (var genre in Model.Genres)
+        @if (Model.Genres is not null)
         {
-            <h3>@genre.Key | @genre.Value</h3>
+            @foreach (var genre in Model.Genres)
+            {
+                <div class="row">
+                    <div class="col">
+                        <h3 class="text-center">
+                            @genre.Key
+                        </h3>
+                    </div>
+                    <div class="col">
+                        <h3 class="text-center">
+                            @genre.Value
+                        </h3>
+                    </div>
+                </div>
+            }
         }
     </div>
 </div>
 
 <div class="row my-4 bg-color text-center text-color-white shadow">
     <div class="col py-3">
-        <h1 class="text-center">Your song preferences</h1>
+        @if (Model.UserTitle is not null)
+        {
+        <h1 class="text-center pt-0">You are a @Model.UserTitle!</h1>
+        }
     </div>
 </div>
 <div class="row my-4 text-center text-color-white shadow">
     <div class="col py-3">
-        <h3>Acousticness = @Model.AudioFeatures.Acousticness</h3>
-        <h3>Danceability = @Model.AudioFeatures.Danceability</h3>
-        <h3>Energy = @Model.AudioFeatures.Energy</h3>
-        <h3>Speechiness = @Model.AudioFeatures.Speechiness</h3>
-        <h3>Valence = @Model.AudioFeatures.Valence</h3>
+        @if (Model.AudioFeatures is not null)
+        {
+            
+            @foreach (var feature in features)
+            {
+                <div class="row">
+                    <div class="col">
+                        <h3 class="text-center">
+                            @feature.Item1
+                        </h3>
+                    </div>
+                    <div class="col">
+                        <h3 class="text-center">
+                            @feature.Item2
+                        </h3>
+                    </div>
+                </div>
+            }
+        }
     </div>
 </div>
 <div class="row my-4 bg-color text-center text-color-white shadow">
@@ -37,15 +76,9 @@
     </div>
 </div>
 <div class="text-center">
-    <h1 class="text-center">You are a @Model.UserTitle!</h1>
     <h2>Total duration of your top 50 songs</h2>
-    <h3>@Model.TotalDuration.Hours hours @Model.TotalDuration.Minutes minutes and @Model.TotalDuration.Seconds seconds.</h3>
-</div>
-
-@* stop loading on myprofile*@
-<script>
-    function hideLoadingAnimation() {
-        document.getElementById('loading-container').style.display = 'none';
+    @if (Model.TotalDuration is not null)
+    {
+        <h3>@Model.TotalDuration.Value.Hours hours @Model.TotalDuration.Value.Minutes minutes and @Model.TotalDuration.Value.Seconds seconds.</h3>
     }
-    hideLoadingAnimation();
-</script>
+</div>

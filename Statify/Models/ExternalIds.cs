@@ -14,5 +14,4 @@ namespace Statify.Models
         [JsonPropertyName("upc")]
         public string? Upc { get; set; }
     }
-
 }

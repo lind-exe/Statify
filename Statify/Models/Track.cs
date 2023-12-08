@@ -1,7 +1,6 @@
 ﻿namespace Statify.Models
 {
     using System.Text.Json.Serialization;
-
     public class Track
     {
         [JsonPropertyName("album")]

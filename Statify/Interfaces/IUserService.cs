@@ -9,7 +9,6 @@ namespace Statify.Interfaces
         /// </summary>
         /// <returns>A deserialized User from json</returns>
         public Task<User> GetUser();
-
         /// <summary>
         /// User selects # of playlists to receive from API
         /// User must be authorized
@@ -33,7 +32,17 @@ namespace Statify.Interfaces
         /// <param name="endpoint"></param>
         /// <returns>Singular Track object or TrackCollection</returns>
         public Task<T> GetTracks<T>(string endpoint);
+        /// <summary>
+        /// Retrieves multiple artists from spotify
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns>list of artists based on how many artist-ids are provided</returns>
         Task<ArtistData.ArtistArtists> GetArtists(string ids);
+        /// <summary>
+        /// Retrieves audio features from spotify
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns>array of audio features based on how many song-ids are provided</returns>
         Task <AudioFeatureCollection>GetAudioFeatures(string ids);
     }
 }

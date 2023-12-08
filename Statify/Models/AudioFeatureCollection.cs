@@ -6,9 +6,7 @@ namespace Statify.Models
     {
         [JsonPropertyName("audio_features")]
         public AudioFeature[]? Features { get; set; }
-
     }
-
     public class AudioFeature
     {
         [JsonPropertyName("acousticness")]
@@ -65,5 +63,4 @@ namespace Statify.Models
         [JsonPropertyName("valence")]
         public float Valence { get; set; }
     }
-
 }

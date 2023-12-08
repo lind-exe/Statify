@@ -10,11 +10,9 @@ namespace Statify.Pages
     {
         private readonly IStatisticsService _statisticsService;
         public Dictionary<string, int>? Genres { get; set; }  
-        public Track? Track { get; set; }
-        public TrackData.LikedTracks? LikedSongs { get; set; }
-        public AudioFeature AudioFeatures { get; set; }
-        public string UserTitle { get; set; }
-        public TimeSpan TotalDuration { get; set; }
+        public AudioFeature? AudioFeatures { get; set; }
+        public string? UserTitle { get; set; }
+        public TimeSpan? TotalDuration { get; set; }
         public StatisticsModel(IStatisticsService statisticsService)
         {
             _statisticsService = statisticsService;
@@ -25,8 +23,6 @@ namespace Statify.Pages
             AudioFeatures = await _statisticsService.GetCalculatedAudioFeatures();
             UserTitle = await _statisticsService.GetUserSoundProfileTitle();
             TotalDuration = _statisticsService.GetTotalDurationOfTopSongs();
-            // get top audio feature - x amount of songs
-
         }
     }
 }

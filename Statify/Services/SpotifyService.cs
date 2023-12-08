@@ -13,12 +13,10 @@ namespace Statify.Services
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly Interfaces.IAuthorizationService _authorizationService;
-        //private const string RedirectUri = "https://localhost:7274";
+        //private const string RedirectUri = "https://localhost:7274";  // for testing locally
         private const string RedirectUri = "https://spotifystats.azurewebsites.net";
         public PkceAuthorization? Authentication { get; set; }
         public SpotifyApiCodes? SpotifyCodes { get; set; } = new();
-
-
         public SpotifyService(IHttpContextAccessor httpContextAccessor, Interfaces.IAuthorizationService authorizationService)
         {
             _httpContextAccessor = httpContextAccessor;

@@ -82,15 +82,15 @@ namespace Statify.Tests
             // Arrange
             var expectedCount = 20;
             var expectedResponseJson = File.ReadAllText("../../../Data/topartists.json");
-            var expectedArtists = JsonSerializer.Deserialize<ArtistCollection>(expectedResponseJson);
+            var expectedArtists = JsonSerializer.Deserialize<ArtistData.ArtistItems>(expectedResponseJson);
 
             var mock = new Mock<ISpotifyService>();
 
-            mock.Setup(x => x.SendRequest<ArtistCollection>(It.IsAny<string>()).Result).Returns(expectedArtists!);
+            mock.Setup(x => x.SendRequest<ArtistData.ArtistItems>(It.IsAny<string>()).Result).Returns(expectedArtists!);
             var userService = new UserService(mock.Object);
 
             // Act
-            var actual = await userService.GetTopItems<ArtistCollection>("tracks", "medium_term");
+            var actual = await userService.GetTopItems<ArtistData.ArtistItems>("artist", "medium_term");
 
             // Assert
             Assert.NotNull(actual);

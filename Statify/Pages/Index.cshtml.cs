@@ -16,7 +16,6 @@ namespace Statify.Pages
     {
         public PkceAuthorization? Authentication { get; set; }
         private readonly ISpotifyService _spotifyService;
-
         public IndexModel(ISpotifyService spotifyService)
         {
             _spotifyService = spotifyService;
