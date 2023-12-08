@@ -19,7 +19,8 @@ namespace Statify.Services
             SpotifyApiCodes = new();
         }
 
-        private const string RedirectUri = "https://localhost:7274";
+        //private const string RedirectUri = "https://localhost:7274";
+        private const string RedirectUri = "spotifystats.azurewebsites.net";
         private const string Scope = "user-read-private user-read-email user-top-read user-library-read";
 
         public void GenerateCodeChallenge()
