@@ -1,0 +1,23 @@
+name: Chuck Norris Joke
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  chuck-norris-joke:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fetch Chuck Norris Joke
+        id: chuck-norris
+        run: |
+          joke=$(curl -s 'https://api.chucknorris.io/jokes/random' | jq -r '.value')
+          echo "::set-output name=joke::$joke"
+
+      - name: Display Chuck Norris Joke
+        run: |
+          echo "Here's a Chuck Norris joke:"
+          echo "${{ steps.chuck-norris.outputs.joke }}"
